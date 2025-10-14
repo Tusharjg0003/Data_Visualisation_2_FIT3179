@@ -1,0 +1,102 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Screen & Gaming Time among Adolescents (2014)",
+    "subtitle": "Boys spent more time gaming than girls across most countries.",
+    "fontSize": 16,
+    "subtitleFontSize": 12,
+    "anchor": "start"
+  },
+  "data": {
+    "url": "data/gaming_time_clean.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "VALUE": "number",
+        "YEAR": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "calculate": "datum.COUNTRY == '' ? 'HBSC Member Countries' : datum.COUNTRY",
+      "as": "COUNTRY_DISPLAY"
+    }
+  ],
+  "mark": {
+    "type": "bar",
+    "cornerRadius": 4
+  },
+  "encoding": {
+    "y": {
+      "field": "COUNTRY_DISPLAY",
+      "type": "nominal",
+      "sort": {
+        "field": "VALUE",
+        "op": "mean",
+        "order": "descending"
+      },
+      "title": "Country",
+      "axis": {
+        "labelLimit": 100
+      }
+    },
+    "x": {
+      "field": "VALUE",
+      "type": "quantitative",
+      "title": "% of adolescents playing ≥ 2 h on weekdays",
+      "scale": {
+        "domain": [0, 70]
+      }
+    },
+    "color": {
+      "field": "SEX",
+      "type": "nominal",
+      "scale": {
+        "domain": ["MALE", "FEMALE"],
+        "range": ["#1f77b4", "#ff69b4"]
+      },
+      "title": "Sex",
+      "legend": {
+        "title": "Sex",
+        "labelFontSize": 12,
+        "titleFontSize": 12
+      }
+    },
+    "tooltip": [
+      {
+        "field": "COUNTRY_DISPLAY",
+        "title": "Country",
+        "type": "nominal"
+      },
+      {
+        "field": "SEX",
+        "title": "Sex",
+        "type": "nominal"
+      },
+      {
+        "field": "VALUE",
+        "title": "Value (%)",
+        "type": "quantitative",
+        "format": ".1f"
+      },
+      {
+        "field": "YEAR",
+        "title": "Year",
+        "type": "nominal"
+      }
+    ]
+  },
+  "width": 600,
+  "height": 500,
+  "config": {
+    "axis": {
+      "labelFontSize": 10,
+      "titleFontSize": 12
+    },
+    "legend": {
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    }
+  }
+}

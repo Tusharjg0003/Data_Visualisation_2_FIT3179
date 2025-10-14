@@ -1,0 +1,74 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Physical Inactivity Trends: Adolescents (11-17 years), 2001-2016",
+  "width": 800,
+  "height": 300,
+  "data": {
+    "url": "data/physical_activity_insufficient_11-17.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum.Dim2 == '11-17 years'"
+    },
+    {
+      "filter": "datum.Period >= 2001 && datum.Period <= 2016"
+    },
+    {
+      "filter": "datum.FactValueNumeric != null"
+    },
+    {
+      "filter": "datum['Location type'] == 'Country'"
+    },
+    {
+      "filter": "datum.Dim1 == 'Both sexes'"
+    },
+    {
+      "filter": "datum.Location == 'United States of America' || datum.Location == 'China' || datum.Location == 'India' || datum.Location == 'Brazil' || datum.Location == 'Mexico' || datum.Location == 'Germany' || datum.Location == 'United Kingdom' || datum.Location == 'France'"
+    },
+    {
+      "sort": [{"field": "Period"}]
+    }
+  ],
+  "mark": {
+    "type": "line",
+    "point": true,
+    "strokeWidth": 3
+  },
+  "encoding": {
+    "x": {
+      "field": "Period",
+      "type": "quantitative",
+      "title": "Year",
+      "axis": {"format": "d", "titleFontSize": 14, "labelFontSize": 12}
+    },
+    "y": {
+      "field": "FactValueNumeric",
+      "type": "quantitative",
+      "title": "Physically inactive (%)",
+      "scale": {"domain": [60, 100]},
+      "axis": {"titleFontSize": 14, "labelFontSize": 12}
+    },
+    "color": {
+      "field": "Location",
+      "type": "nominal",
+      "title": "Country",
+      "scale": {"scheme": "category20"},
+      "legend": {
+        "orient": "top-right",
+        "titleFontSize": 12,
+        "labelFontSize": 10,
+        "columns": 2,
+        "symbolType": "stroke"
+      }
+    },
+    "tooltip": [
+      {"field": "Location", "title": "Country", "type": "nominal"},
+      {"field": "Period", "title": "Year", "type": "quantitative"},
+      {"field": "FactValueNumeric", "title": "Inactivity (%)", "format": ".1f", "type": "quantitative"}
+    ]
+  },
+  "config": {
+    "view": {"stroke": "transparent"},
+    "background": "#f8f9fa"
+  }
+}

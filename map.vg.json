@@ -1,0 +1,103 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Global Obesity Prevalence Distribution (5-19 years)",
+    "subtitle": "Hover over countries for detailed information",
+    "subtitleFontSize": 12,
+    "subtitleColor": "#666"
+  },
+  "width": 800,
+  "height": 500,
+  "projection": {"type": "equalEarth"},
+  "data": {
+    "url": "data/countries.topojson",
+    "format": {"type": "topojson", "feature": "countries1"}
+  },
+  "transform": [
+    {
+      "lookup": "properties.ISO_A3",
+      "from": {
+        "data": {"url": "data/obesity_map_with_risk.csv"},
+        "key": "iso3",
+        "fields": ["prevalence", "country", "lower_ci", "upper_ci", "risk_level", "risk_color"]
+      }
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 0.5,
+        "cursor": "pointer"
+      },
+      "encoding": {
+        "color": {
+          "field": "prevalence",
+          "type": "quantitative",
+          "title": "Obesity Prevalence (%)",
+          "scale": {
+            "scheme": "reds",
+            "domain": [0, 50]
+          },
+          "legend": {
+            "orient": "right",
+            "titleFontSize": 14,
+            "labelFontSize": 12,
+            "titlePadding": 15,
+            "labelPadding": 5,
+            "gradientLength": 200,
+            "gradientThickness": 20
+          }
+        },
+        "tooltip": [
+          {"field": "country", "title": "🌍 Country", "type": "nominal"},
+          {"field": "prevalence", "title": "📊 Obesity Prevalence", "format": ".1f", "type": "quantitative"},
+          {"field": "risk_level", "title": "⚠️ Risk Level", "type": "nominal"},
+          {"field": "lower_ci", "title": "📉 Lower CI", "format": ".1f", "type": "quantitative"},
+          {"field": "upper_ci", "title": "📈 Upper CI", "format": ".1f", "type": "quantitative"}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#DC143C",
+        "strokeWidth": 3,
+        "fill": "transparent",
+        "cursor": "pointer"
+      },
+      "encoding": {
+        "tooltip": [
+          {"field": "country", "title": "🌍 Country", "type": "nominal"},
+          {"field": "prevalence", "title": "📊 Obesity Prevalence", "format": ".1f", "type": "quantitative"},
+          {"field": "risk_level", "title": "⚠️ Risk Level", "type": "nominal"},
+          {"field": "lower_ci", "title": "📉 Lower CI", "format": ".1f", "type": "quantitative"},
+          {"field": "upper_ci", "title": "📈 Upper CI", "format": ".1f", "type": "quantitative"}
+        ]
+      },
+      "transform": [
+        {
+          "filter": "datum.risk_level === 'High Risk'"
+        }
+      ]
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": "transparent"
+    },
+    "background": "#f8f9fa",
+    "tooltip": {
+      "theme": "dark",
+      "cornerRadius": 12,
+      "fontSize": 13,
+      "fontWeight": "normal",
+      "padding": 16,
+      "color": "white",
+      "backgroundColor": "rgba(0, 0, 0, 0.85)",
+      "border": "2px solid rgba(255, 255, 255, 0.3)",
+      "boxShadow": "0 4px 12px rgba(0, 0, 0, 0.3)"
+    }
+  }
+}
