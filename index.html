@@ -12,10 +12,21 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       line-height: 1.6;
       color: #333;
-      max-width: 1200px;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+    }
+    
+    .main-container {
+      max-width: 98%;
       margin: 0 auto;
-      padding: 20px;
-      background-color: #f8f9fa;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      border-radius: 15px;
+      margin-top: 5px;
+      margin-bottom: 5px;
     }
     
     h1 {
@@ -50,24 +61,74 @@
       color: #7f8c8d;
       margin-bottom: 40px;
       font-style: italic;
+      max-width: 100%;
+      line-height: 1.6;
     }
     
     .section {
-      background: white;
-      margin-bottom: 40px;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+      margin-bottom: 20px;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      border-left: 6px solid #3498db;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .section:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
     }
     
     .section-title {
       font-size: 2.2em;
       font-weight: 700;
       color: #2c3e50;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
       text-align: center;
       padding: 20px 0;
-      border-bottom: 2px solid #ecf0f1;
+      border-bottom: 3px solid #3498db;
+    }
+    
+    .section-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    
+    .content-left {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .content-right {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .chart-full-width {
+      grid-column: 1 / -1;
+    }
+    
+    .trend-chart-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 30px;
+      align-items: start;
+    }
+    
+    .chart-left {
+      display: flex;
+      justify-content: flex-start;
+    }
+    
+    .insight-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
     }
     
     .overview {
@@ -75,20 +136,63 @@
       line-height: 1.8;
       color: #555;
       margin-bottom: 30px;
-      text-align: justify;
+      text-align: left;
       background: #f8f9fa;
       padding: 20px;
       border-left: 4px solid #3498db;
       border-radius: 4px;
+      max-width: 100%;
     }
     
     .chart-container {
-      margin: 30px 0;
+      margin: 20px 0;
       text-align: center;
-      background: white;
-      padding: 20px;
-      border-radius: 6px;
-      box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+      background: linear-gradient(145deg, #ffffff 0%, #fdfdfd 100%);
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      border: 1px solid #e9ecef;
+      transition: box-shadow 0.3s ease;
+    }
+    
+    .chart-container:hover {
+      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    }
+    
+    .chart-description {
+      max-width: 100%;
+      margin: 15px 0;
+      text-align: center;
+      line-height: 1.6;
+      color: #555;
+      font-size: 0.95em;
+    }
+    
+    p {
+      max-width: 65ch;
+      margin: 15px 0;
+      text-align: justify;
+      hyphens: auto;
+      line-height: 1.6;
+      color: #555;
+    }
+    
+    .overview {
+      max-width: 100%;
+      margin: 20px 0;
+      text-align: left;
+      line-height: 1.7;
+      color: #444;
+      font-size: 1.05em;
+      background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+      padding: 25px;
+      border-radius: 8px;
+      border-left: 4px solid #3498db;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    
+    .wide-content {
+      max-width: 100%;
     }
     
     #physical-activity-chart {
@@ -119,6 +223,7 @@
       font-weight: 600;
       color: #2c3e50;
       margin-bottom: 10px;
+      text-align: center;
     }
     
     .chart-description {
@@ -126,19 +231,25 @@
       color: #7f8c8d;
       margin-bottom: 20px;
       font-style: italic;
+      text-align: center;
     }
     
     .insight {
-      background: #e8f5e8;
-      border-left: 4px solid #27ae60;
-      padding: 15px;
-      margin-top: 15px;
-      border-radius: 4px;
+      background: linear-gradient(135deg, #e8f4fd 0%, #f0f8ff 100%);
+      border-left: 5px solid #3498db;
+      padding: 25px;
+      margin: 20px 0;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgba(52, 152, 219, 0.1);
+      max-width: 75ch;
+      text-align: justify;
+      line-height: 1.6;
+      color: #444;
       font-size: 0.95em;
     }
     
     .insight strong {
-      color: #27ae60;
+      color: #3498db;
       font-weight: 600;
     }
     
@@ -150,7 +261,15 @@
       border-radius: 6px;
       font-size: 1.1em;
       line-height: 1.8;
-      text-align: justify;
+      text-align: left;
+    }
+    
+    .conclusion p {
+      max-width: 100%;
+      text-align: left;
+      line-height: 1.7;
+      color: #333;
+      font-size: 1.05em;
     }
     
     .conclusion h2 {
@@ -283,8 +402,20 @@
     }
     
     @media (max-width: 768px) {
-      body {
-        padding: 10px;
+      .section-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      
+      .trend-chart-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .main-container {
+        padding: 15px;
+        margin-top: 10px;
+        margin-bottom: 10px;
       }
       
       h1 {
@@ -302,6 +433,7 @@
   </style>
 </head>
 <body>
+  <div class="main-container">
   <h1>Adolescent Health and Well-Being: Global Patterns and Digital Behaviour</h1>
   <p class="subtitle">A Comprehensive Analysis of Global Adolescent Health Trends, Physical Activity Patterns, and Digital Behavior</p>
 
@@ -309,24 +441,45 @@
   <div class="section">
     <h2 class="section-title">🩺 Global Obesity Among Adolescents</h2>
     
+    <div class="section-content">
+      <div class="content-left">
     <div class="overview">
-      Adolescent obesity has reached crisis proportions globally, with our analysis of 192 countries revealing that obesity rates now average 10.2% among 5-19 year olds, ranging from 0.8% to a staggering 41.0%. Five Pacific Island nations exceed 30% prevalence, led by the Cook Islands at 41.0%. More alarmingly, our longitudinal analysis shows that 191 out of 192 countries experienced increasing obesity rates between 1990-2022, with an average increase of 7.4 percentage points per country. This section explores the spatial distribution, gender disparities, and long-term trends that reveal a global health emergency affecting the next generation.
+          Adolescent obesity has reached crisis proportions globally. 
+          Our analysis of 192 countries reveals obesity rates 
+          now average 10.2% among 5-19 year olds. 
+          Rates range from 0.8% to a staggering 41.0%. 
+          Five Pacific Island nations exceed 30% prevalence. 
+          The Cook Islands leads at 41.0%. 
+          More alarmingly, our longitudinal analysis shows concerning trends. 
+          191 out of 192 countries experienced increasing obesity rates 
+          between 1990-2022. The average increase was 7.4 percentage points 
+          per country. This section explores spatial distribution patterns. 
+          We examine gender disparities and long-term trends. 
+          These reveal a global health emergency affecting the next generation.
     </div>
 
-    <div class="chart-container">
-      <h3 class="chart-title">Global Obesity Map</h3>
-        <p class="chart-description">Visualises obesity prevalence by country using choropleth mapping techniques. Countries are color-coded by obesity rates with darker reds indicating higher prevalence. Hover over countries for detailed statistics including prevalence rates and confidence intervals.</p>
-      <div id="map"></div>
-      
-      
-      <div class="insight">
-        <strong>Key Insight:</strong> The global obesity map reveals a disturbing pattern where Pacific Island nations face the most severe crisis, with the Cook Islands (41.0%), Niue (40.6%), and Nauru (36.0%) leading a cluster of nations where over one-third of adolescents are obese. This geographical concentration suggests environmental and cultural factors beyond simple economic development play crucial roles in adolescent health outcomes.
+        <div class="insight">
+          <strong>Key Insight:</strong> The global obesity map reveals 
+          a disturbing pattern. Pacific Island nations face the 
+          most severe crisis. The Cook Islands (41.0%), Niue 
+          (40.6%), and Nauru (36.0%) lead a cluster. 
+          Over one-third of adolescents are obese in 
+          these nations. This geographical concentration suggests important factors. 
+          Environmental and cultural factors beyond simple economic development 
+          play crucial roles in adolescent health outcomes.
+        </div>
       </div>
-    </div>
-
+      
+      <div class="content-right">
     <div class="chart-container">
-      <h3 class="chart-title">Gender Disparity in Adolescent Obesity</h3>
-      <p class="chart-description">Displays key statistics on gender differences in obesity rates across countries.</p>
+          <h3 class="chart-title">Global Obesity Map</h3>
+          <p class="chart-description">Visualises obesity prevalence by country using choropleth mapping techniques. Countries are color-coded by obesity rates with darker reds indicating higher prevalence. Hover over countries for detailed statistics including prevalence rates and confidence intervals.</p>
+      <div id="map"></div>
+          </div>
+          </div>
+      </div>
+      
+    <div class="chart-container chart-full-width">
       <div class="card-container">
         <div class="info-card">
           <h3>Gender Disparity Insights</h3>
@@ -353,9 +506,6 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="insight">
-        <strong>Key Insight:</strong> Gender disparities reveal a surprising pattern: males show higher obesity rates in 70% of countries, with an average gap of 1.9 percentage points. However, extreme cases exist in both directions: the Bahamas shows the largest female advantage (10.9 percentage points), while Haiti shows the largest male advantage (15.7 percentage points), indicating complex regional and cultural factors at play.
       </div>
     </div>
       
@@ -581,28 +731,41 @@
           <span class="country-tag" data-country="USA">United States <span class="data-indicator" title="Obesity: Complete (1990-2022) | Physical Activity: Complete (2001-2016)">✓✓</span> <button onclick="removeCountry('USA')" style="margin-left: 5px; background: none; border: none; color: #666; cursor: pointer;">×</button></span>
           <span class="country-tag" data-country="CHN">China <span class="data-indicator" title="Obesity: Complete (1990-2022) | Physical Activity: Complete (2001-2016)">✓✓</span> <button onclick="removeCountry('CHN')" style="margin-left: 5px; background: none; border: none; color: #666; cursor: pointer;">×</button></span>
           <span class="country-tag" data-country="IND">India <span class="data-indicator" title="Obesity: Complete (1990-2022) | Physical Activity: Limited (2001-2016)">✓△</span> <button onclick="removeCountry('IND')" style="margin-left: 5px; background: none; border: none; color: #666; cursor: pointer;">×</button></span>
-        </div>
+          </div>
         <div style="margin-top: 10px; font-size: 12px; color: #666;">
           <strong>Data Availability:</strong> 
           <span style="color: #28a745;">✓✓ Complete data for both charts</span> | 
           <span style="color: #ffc107;">✓△ Limited data for physical activity</span> | 
           <span style="color: #dc3545;">✓✗ Complete obesity data, no physical activity data</span>
+          </div>
         </div>
-      </div>
         <div class="filter-buttons">
         <button class="btn" onclick="updateTrendChart()">Update Obesity Chart</button>
         <button class="btn" onclick="updatePhysicalActivityChart()">Update Activity Chart</button>
         <button class="btn btn-secondary" onclick="clearAllCountries()">Clear All</button>
         </div>
       </div>
-
+      
     <div class="chart-container">
       <h3 class="chart-title">Obesity Trends Over Time</h3>
       <p class="chart-description">Shows the growth of obesity from 1990–2022 across selected countries.</p>
       
+      <div class="trend-chart-layout">
+        <div class="chart-left">
       <div id="trend-chart"></div>
+        </div>
+        <div class="insight-right">
       <div class="insight">
-        <strong>Key Insight:</strong> The temporal analysis reveals a global epidemic in slow motion: virtually every country (191 out of 192) has experienced rising adolescent obesity since 1990, with an average increase of 7.4 percentage points over three decades. This represents not isolated incidents but a systematic failure of global health systems to address the fundamental drivers of adolescent obesity.
+            <strong>Key Insight:</strong> The temporal analysis reveals a 
+            global epidemic in slow motion. Virtually every country 
+            (191 out of 192) has experienced rising adolescent 
+            obesity since 1990. The average increase was 
+            7.4 percentage points over three decades. This represents 
+            not isolated incidents but systematic failure. Global health 
+            systems have failed to address the fundamental drivers 
+            of adolescent obesity.
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -611,17 +774,48 @@
   <div class="section">
     <h2 class="section-title">🏃 Physical Inactivity and Lifestyle Factors</h2>
     
+    <div class="section-content">
+      <div class="content-left">
     <div class="overview">
-      The obesity crisis finds its roots in a parallel epidemic of physical inactivity. Our analysis of 6,567 records across multiple countries reveals that physical inactivity among 11-17 year olds averages a staggering 83.5%, with rates ranging from 63.2% to 97.2%. This means that in some regions, virtually adolescents are insufficiently active. The relationship between inactivity and obesity is not merely correlational: it represents a fundamental shift in how young people live, move, and engage with their environment. But physical inactivity is just one piece of a larger puzzle. As we'll see in the next section, the digital revolution has introduced new behavioral patterns that further compound this sedentary crisis, creating a perfect storm of risk factors that threaten adolescent health worldwide.
+          The obesity crisis finds its roots in 
+          a parallel epidemic of physical inactivity. 
+          Our analysis of 6,567 records across multiple 
+          countries reveals concerning statistics. Physical inactivity 
+          among 11-17 year olds averages a staggering 83.5%. 
+          Rates range from 63.2% to 97.2%. 
+          This means that in some regions, virtually 
+          all adolescents are insufficiently active. 
+          The relationship between inactivity and obesity 
+          is not merely correlational. It represents a 
+          fundamental shift in how young people live. 
+          It affects how they move and engage 
+          with their environment. Physical inactivity is 
+          just one piece of a larger puzzle. 
+          The digital revolution has introduced new behavioral patterns. 
+          These further compound this sedentary crisis. 
+          They create a perfect storm of risk 
+          factors threatening adolescent health worldwide.
     </div>
 
-    <div class="chart-container">
-      <h3 class="chart-title">Physical Inactivity Trends</h3>
-      <p class="chart-description">Shows physical inactivity trends across selected countries (2001–2016). Use the filter above to select countries for comparison.</p>
+        <div class="insight">
+          <strong>Key Insight:</strong> Physical inactivity has reached epidemic 
+          proportions. Our data shows that 83.5% of 
+          adolescents globally are insufficiently active. In some 
+          regions, this figure approaches 97%. This means 
+          virtually no adolescents meet basic physical activity guidelines. 
+          This represents a fundamental transformation in adolescent behavior. 
+          It directly fuels the obesity crisis. We are 
+          creating a generation that is both sedentary and 
+          at unprecedented risk for chronic diseases.
+        </div>
+      </div>
       
+      <div class="content-right">
+        <div class="chart-container">
+          <h3 class="chart-title">Physical Inactivity Trends</h3>
+          <p class="chart-description">Shows physical inactivity trends across selected countries (2001–2016). Use the filter above to select countries for comparison.</p>
       <div id="physical-activity-chart"></div>
-      <div class="insight">
-        <strong>Key Insight:</strong> Physical inactivity has reached epidemic proportions, with our data showing that 83.5% of adolescents globally are insufficiently active. In some regions, this figure approaches 97%, meaning virtually no adolescents meet basic physical activity guidelines. This represents a fundamental transformation in adolescent behavior that directly fuels the obesity crisis, creating a generation that is both sedentary and at unprecedented risk for chronic diseases.
+        </div>
       </div>
     </div>
   </div>
@@ -631,12 +825,12 @@
     <h2 class="section-title">💻 Digital Lifestyles and Emerging Risks</h2>
     
     <div class="overview">
-      While physical inactivity represents the foundation of the adolescent health crisis, the digital revolution has introduced a new dimension of behavioral risk factors. The proliferation of screens, gaming, and social media has fundamentally altered how adolescents spend their time, directly competing with physical activity and creating new pathways to both entertainment and addiction. Our analysis reveals a dramatic gender-based digital divide: in 2014, boys dominated gaming with 54.4% spending excessive time on games compared to only 30.0% of girls: a 24.3 percentage point gap that held true across 41 countries studied. However, by 2022, this pattern had completely reversed for social media, with girls now showing 14.1% problematic usage versus 8.4% for boys: a 5.7 percentage point gap favoring females. This section examines how digital behaviors have evolved from recreational gaming to addictive social media consumption, creating additional layers of risk that compound the physical inactivity crisis and threaten the next generation's health.
+      While physical inactivity represents the foundation of the adolescent health crisis, the digital revolution has introduced new behavioral risk factors that fundamentally alter how adolescents spend their time. The proliferation of screens, gaming, and social media creates new pathways to both entertainment and addiction, directly competing with physical activity. Our analysis reveals a dramatic gender-based digital divide that has completely reversed over time. In 2014, boys dominated gaming with 54.4% spending excessive time on games compared to only 30.0% of girls, creating a 24.3 percentage point gap across 41 countries. However, by 2022, this pattern completely reversed as girls now show 14.1% problematic social media usage versus 8.4% for boys, representing a 5.7 percentage point gap favoring females. A remarkable reversal has occurred in digital behavior where girls now lead in problematic digital engagement, showing 14.1% signs of social media addiction versus 8.4% for boys. This represents a complete inversion of the 2014 gaming pattern, with girls now at higher risk in 93% of countries (40 out of 43). This shift from gaming (male-dominated) to social media (female-dominated) suggests that digital platforms themselves may create gender-specific addiction patterns, fundamentally changing how adolescents interact with technology. Digital behaviors have evolved significantly from recreational gaming to addictive social media consumption, creating additional layers of risk that compound the physical inactivity crisis and threaten the next generation's health.
     </div>
 
     <div class="chart-container">
       <h3 class="chart-title">Screen & Gaming Time</h3>
-      <p class="chart-description">Dataset: HBSC (2014) – Proportion of youth spending ≥2 hours daily on games.</p>
+      <p class="chart-description">Proportion of youth spending ≥2 hours daily on games.</p>
       
       <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px; font-size: 14px;">
         <strong>📊 Data Coverage:</strong> 41 European countries (2014 only) | 
@@ -721,24 +915,82 @@
         </div>
       </div>
       
+      <div class="trend-chart-layout">
+        <div class="chart-left">
       <div id="screen-gaming-chart"></div>
+        </div>
+        <div class="insight-right">
       <div class="insight">
-        <strong>Key Insight:</strong> The 2014 gaming data reveals a stark gender divide that held universally: across all 41 countries, boys consistently showed higher gaming engagement, with an average of 54.4% spending excessive time on games versus 30.0% of girls. This 24.3 percentage point gap represents one of the most consistent gender differences in adolescent behavior, suggesting that early digital behaviors were heavily skewed toward male engagement with gaming platforms.
+            <strong>Key Insight:</strong> The 2014 gaming data reveals a 
+            stark gender divide that held universally. Across all 
+            41 countries, boys consistently showed higher gaming engagement. 
+            An average of 54.4% spent excessive time on games 
+            versus 30.0% of girls. This created a 
+            24.3 percentage point gap. This represents one of 
+            the most consistent gender differences in adolescent behavior. 
+            Early digital behaviors were heavily skewed toward male 
+            engagement with gaming platforms.
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="chart-container">
       <h3 class="chart-title">Problematic Social Media Use</h3>
-      <p class="chart-description">Dataset: HBSC (2022) – Share of 15-year-olds showing problematic use patterns.</p>
+      <p class="chart-description">Share of 15-year-olds showing problematic use patterns.</p>
       
       <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px; font-size: 14px;">
         <strong>📊 Data Coverage:</strong> 43 European countries (2022 only) | 
         <span style="color: #ffc107;">⚠️ Limited geographic scope</span>
       </div>
       
+      <div style="background: #fff3cd; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 6px solid #ffc107; border: 2px solid #ffc107;">
+        <h4 style="margin: 0 0 15px 0; color: #856404; font-size: 1.1em; font-weight: bold;">🔧 Gender Filter Controls</h4>
+        <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+          <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 500;">
+            <input type="checkbox" id="show-girls" checked onchange="updateSocialMediaGenderFilter()" style="transform: scale(1.2);">
+            <span style="color: #e91e63; font-size: 1em;">● Girls (Pink)</span>
+          </label>
+          <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 500;">
+            <input type="checkbox" id="show-boys" checked onchange="updateSocialMediaGenderFilter()" style="transform: scale(1.2);">
+            <span style="color: #2196f3; font-size: 1em;">● Boys (Blue)</span>
+          </label>
+          <button onclick="toggleAllGenders()" style="background: #ffc107; color: #856404; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 14px; font-weight: bold;">🔄 Toggle All</button>
+        </div>
+        <div style="font-size: 13px; color: #856404; margin-top: 10px; font-style: italic;">
+          <strong>💡 Tip:</strong> Uncheck a gender to focus on specific patterns or compare individual gender trends.
+        </div>
+      </div>
+      
+      <div class="trend-chart-layout">
+        <div class="chart-left">
       <div id="social-media-chart"></div>
+        </div>
+        <div class="insight-right">
       <div class="insight">
-        <strong>Key Insight:</strong> A remarkable reversal has occurred in digital behavior: by 2022, girls now lead in problematic digital engagement, with 14.1% showing signs of social media addiction versus 8.4% of boys. This represents a complete inversion of the 2014 gaming pattern, with girls now at higher risk in 93% of countries (40 out of 43). This shift from gaming (male-dominated) to social media (female-dominated) suggests that digital platforms themselves may create gender-specific addiction patterns, fundamentally changing how adolescents interact with technology.
+            <strong>Key Insight:</strong> By 2022, the gender dynamics in 
+            digital behavior had completely reversed. Girls now 
+            lead in problematic social media use across 93% 
+            of countries (40 out of 43). An average of 
+            14.1% showed signs of addiction versus 8.4% 
+            of boys. This created a 5.7 percentage point 
+            gap. This represents a complete inversion from the 
+            2014 gaming pattern where boys dominated. This shift 
+            suggests that different digital platforms create gender-specific 
+            engagement patterns. This fundamentally changes how adolescents 
+            interact with technology over time. The transformation from 
+            gaming dominance (male) to social media dominance (female) 
+            reveals platform-specific behavioral patterns. Social media platforms 
+            appear to be more engaging for girls, while gaming 
+            platforms historically attracted boys. This has profound 
+            implications for digital health interventions. Strategies must 
+            be gender-specific and platform-aware. The data suggests that 
+            addiction mechanisms differ between platforms. Understanding these 
+            patterns is crucial for developing effective prevention 
+            strategies that address the unique risks faced 
+            by each gender in the digital landscape.
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -783,14 +1035,8 @@
       // Load gaming chart
       loadGamingChart();
       
-      // Load social media chart
-      vegaEmbed("#social-media-chart", "social_media_use_2022.vg.json", {actions: false})
-        .then(result => {
-          console.log("Social media chart loaded successfully");
-        })
-        .catch(error => {
-          console.error("Error loading social media chart:", error);
-        });
+      // Load social media chart dynamically
+      updateSocialMediaChart();
     });
 
     function addSelectedCountry() {
@@ -1163,55 +1409,105 @@
       vegaEmbed("#physical-activity-chart", chartConfig, {actions: false}).catch(console.error);
     }
 
+    function updateSocialMediaGenderFilter() {
+      console.log("Gender filter updated");
+      updateSocialMediaChart();
+    }
+
+    function toggleAllGenders() {
+      console.log("Toggle all genders clicked");
+      const girlsCheckbox = document.getElementById('show-girls');
+      const boysCheckbox = document.getElementById('show-boys');
+      
+      if (girlsCheckbox.checked && boysCheckbox.checked) {
+        // Both checked, uncheck boys
+        boysCheckbox.checked = false;
+      } else if (!girlsCheckbox.checked && !boysCheckbox.checked) {
+        // Both unchecked, check both
+        girlsCheckbox.checked = true;
+        boysCheckbox.checked = true;
+      } else {
+        // One checked, check both
+        girlsCheckbox.checked = true;
+        boysCheckbox.checked = true;
+      }
+      
+      updateSocialMediaChart();
+    }
+
+    function getGenderFilter() {
+      const showGirls = document.getElementById('show-girls').checked;
+      const showBoys = document.getElementById('show-boys').checked;
+      
+      if (showGirls && showBoys) {
+        return null; // Show both
+      } else if (showGirls && !showBoys) {
+        return "Girl";
+      } else if (!showGirls && showBoys) {
+        return "Boy";
+      } else {
+        return "none"; // Show neither
+      }
+    }
+
     function updateSocialMediaChart() {
       const selectedCountries = getDigitalSelectedCountries();
       
-      if (selectedCountries.length === 0) {
-        alert('Please select at least one country to display.');
-        return;
+      // If no countries are selected, show all countries by default
+      let filterCondition = "true"; // Show all countries by default
+      
+      if (selectedCountries.length > 0) {
+        // Country code mapping for social media data
+        const countryCodeMap = {
+          'ALB': 'Albania', 'ARM': 'Armenia', 'AUT': 'Austria', 'BE-VLG': 'Belgium (Flanders)', 
+          'BE-WAL': 'Belgium (Wallonia)', 'BGR': 'Bulgaria', 'CAN': 'Canada', 'CHE': 'Switzerland',
+          'CZE': 'Czech Republic', 'DEU': 'Germany', 'DNK': 'Denmark', 'ESP': 'Spain', 
+          'EST': 'Estonia', 'FIN': 'Finland', 'FRA': 'France', 'GB-ENG': 'England', 
+          'GB-SCT': 'Scotland', 'GB-WLS': 'Wales', 'GRC': 'Greece', 'HRV': 'Croatia', 
+          'HUN': 'Hungary', 'IRL': 'Ireland', 'ISL': 'Iceland', 'ISR': 'Israel', 
+          'ITA': 'Italy', 'LTU': 'Lithuania', 'LUX': 'Luxembourg', 'LVA': 'Latvia', 
+          'MDA': 'Moldova', 'MKD': 'North Macedonia', 'MLT': 'Malta', 'NLD': 'Netherlands', 
+          'NOR': 'Norway', 'POL': 'Poland', 'PRT': 'Portugal', 'ROU': 'Romania', 
+          'RUS': 'Russia', 'SVK': 'Slovakia', 'SVN': 'Slovenia', 'SWE': 'Sweden', 'UKR': 'Ukraine'
+        };
+        
+        // Special handling for United Kingdom - expand to all UK regions
+        const expandUKCountries = (codes) => {
+          const expanded = [];
+          codes.forEach(code => {
+            if (code === 'GBR') {
+              // United Kingdom expands to England, Scotland, Wales
+              expanded.push('England', 'Scotland', 'Wales');
+            } else if (countryCodeMap[code]) {
+              expanded.push(countryCodeMap[code]);
+            }
+          });
+          return expanded;
+        };
+        
+        // Convert country codes to country names for filtering
+        const selectedCountryNames = expandUKCountries(selectedCountries);
+        
+        if (selectedCountryNames.length > 0) {
+          filterCondition = selectedCountryNames.map(country => `datum.Country == '${country}'`).join(' || ');
+        }
       }
       
-      // Country code mapping for social media data
-      const countryCodeMap = {
-        'ALB': 'Albania', 'ARM': 'Armenia', 'AUT': 'Austria', 'BE-VLG': 'Belgium (Flanders)', 
-        'BE-WAL': 'Belgium (Wallonia)', 'BGR': 'Bulgaria', 'CAN': 'Canada', 'CHE': 'Switzerland',
-        'CZE': 'Czech Republic', 'DEU': 'Germany', 'DNK': 'Denmark', 'ESP': 'Spain', 
-        'EST': 'Estonia', 'FIN': 'Finland', 'FRA': 'France', 'GB-ENG': 'England', 
-        'GB-SCT': 'Scotland', 'GB-WLS': 'Wales', 'GRC': 'Greece', 'HRV': 'Croatia', 
-        'HUN': 'Hungary', 'IRL': 'Ireland', 'ISL': 'Iceland', 'ISR': 'Israel', 
-        'ITA': 'Italy', 'LTU': 'Lithuania', 'LUX': 'Luxembourg', 'LVA': 'Latvia', 
-        'MDA': 'Moldova', 'MKD': 'North Macedonia', 'MLT': 'Malta', 'NLD': 'Netherlands', 
-        'NOR': 'Norway', 'POL': 'Poland', 'PRT': 'Portugal', 'ROU': 'Romania', 
-        'RUS': 'Russia', 'SVK': 'Slovakia', 'SVN': 'Slovenia', 'SWE': 'Sweden', 'UKR': 'Ukraine'
-      };
+      // Get gender filter condition
+      const genderFilter = getGenderFilter();
+      let genderFilterCondition = "true";
       
-      // Special handling for United Kingdom - expand to all UK regions
-      const expandUKCountries = (codes) => {
-        const expanded = [];
-        codes.forEach(code => {
-          if (code === 'GBR') {
-            // United Kingdom expands to England, Scotland, Wales
-            expanded.push('England', 'Scotland', 'Wales');
-          } else if (countryCodeMap[code]) {
-            expanded.push(countryCodeMap[code]);
-          }
-        });
-        return expanded;
-      };
-      
-      // Convert country codes to country names for filtering
-      const selectedCountryNames = expandUKCountries(selectedCountries);
-      
-      if (selectedCountryNames.length === 0) {
-        alert('No valid countries found for social media data.');
-        return;
+      if (genderFilter === "Girl") {
+        genderFilterCondition = "datum.Gender == 'Girl'";
+      } else if (genderFilter === "Boy") {
+        genderFilterCondition = "datum.Gender == 'Boy'";
+      } else if (genderFilter === "none") {
+        genderFilterCondition = "false";
       }
-      
-      const filterCondition = selectedCountryNames.map(country => `datum.Country == '${country}'`).join(' || ');
       
       const chartConfig = {
         "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-        "title": `Problematic Social Media Use (15-year-olds, 2022) - ${selectedCountryNames.length} Countries`,
+        "title": `Problematic Social Media Use (15-year-olds, 2022)`,
         "width": 800,
         "height": 400,
         "data": {
@@ -1226,6 +1522,9 @@
         "transform": [
           {
             "filter": filterCondition
+          },
+          {
+            "filter": genderFilterCondition
           }
         ],
         "mark": {
@@ -1427,6 +1726,6 @@
       vegaEmbed("#screen-gaming-chart", chartConfig, {actions: false}).catch(console.error);
     }
   </script>
+  </div>
 </body>
-</html>
 </html>
