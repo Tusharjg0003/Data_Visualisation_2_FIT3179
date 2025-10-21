@@ -2,9 +2,10 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "Global Obesity Prevalence Distribution (5-19 years)",
-    "subtitle": "Hover over countries for detailed information",
-    "subtitleFontSize": 12,
-    "subtitleColor": "#666"
+    "subtitle": "Darker colors indicate higher prevalence | Hover for details",
+    "subtitleFontSize": 11,
+    "subtitleColor": "#7f8c8d",
+    "subtitleFontStyle": "italic"
   },
   "width": 800,
   "height": 500,
@@ -81,6 +82,66 @@
           "filter": "datum.risk_level === 'High Risk'"
         }
       ]
+    },
+    {
+      "data": {
+        "values": [
+          {"annotation": "Cook Islands: 41.0%", "lon": -120, "lat": -5},
+          {"annotation": "Timor-Leste: 0.8%", "lon": 180, "lat": 10}
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "color": "#2c3e50",
+        "fontWeight": "600",
+        "align": "center"
+      },
+      "encoding": {
+        "longitude": {"field": "lon", "type": "quantitative"},
+        "latitude": {"field": "lat", "type": "quantitative"},
+        "text": {"field": "annotation", "type": "nominal"}
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"lon": -120, "lat": -5, "lon2": -159.7, "lat2": -21.2},
+          {"lon": 180, "lat": 10, "lon2": 125.7, "lat2": -8.8}
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "stroke": "#e74c3c",
+        "strokeWidth": 2,
+        "strokeDash": [3, 3]
+      },
+      "encoding": {
+        "longitude": {"field": "lon", "type": "quantitative"},
+        "latitude": {"field": "lat", "type": "quantitative"},
+        "longitude2": {"field": "lon2", "type": "quantitative"},
+        "latitude2": {"field": "lat2", "type": "quantitative"}
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"lon": -159.7, "lat": -21.2},
+          {"lon": 125.7, "lat": -8.8}
+        ]
+      },
+      "mark": {
+        "type": "point",
+        "size": 80,
+        "filled": true,
+        "fill": "#e74c3c",
+        "stroke": "white",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "longitude": {"field": "lon", "type": "quantitative"},
+        "latitude": {"field": "lat", "type": "quantitative"}
+      }
     }
   ],
   "config": {

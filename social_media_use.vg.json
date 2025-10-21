@@ -1,0 +1,108 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Problematic Social Media Use",
+  "width": 700,
+  "height": 400,
+  "data": {"url": "data/social_media_transformed.csv"},
+  "params": [
+    {
+      "name": "CountryFilter",
+      "value": "Key Countries",
+      "bind": {
+        "input": "select",
+        "name": "Select Country: ",
+        "options": [
+          "Key Countries",
+          "Romania",
+          "Ireland",
+          "Malta",
+          "Albania",
+          "Bulgaria",
+          "Greece",
+          "Italy",
+          "Cyprus",
+          "Scotland",
+          "Croatia",
+          "England",
+          "Wales",
+          "Germany",
+          "France",
+          "Spain",
+          "Netherlands",
+          "Sweden",
+          "Norway",
+          "Poland",
+          "Czech Republic",
+          "Finland",
+          "Switzerland",
+          "Austria",
+          "Belgium (French)",
+          "Denmark"
+        ],
+        "labels": [
+          "Key Countries (Default)",
+          "Romania",
+          "Ireland",
+          "Malta",
+          "Albania",
+          "Bulgaria",
+          "Greece",
+          "Italy",
+          "Cyprus",
+          "Scotland",
+          "Croatia",
+          "England",
+          "Wales",
+          "Germany",
+          "France",
+          "Spain",
+          "Netherlands",
+          "Sweden",
+          "Norway",
+          "Poland",
+          "Czech Republic",
+          "Finland",
+          "Switzerland",
+          "Austria",
+          "Belgium (French)",
+          "Denmark"
+        ]
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "CountryFilter == 'Key Countries' ? (datum.Country == 'Romania' || datum.Country == 'Ireland' || datum.Country == 'Malta' || datum.Country == 'Albania' || datum.Country == 'Bulgaria' || datum.Country == 'Greece' || datum.Country == 'Italy' || datum.Country == 'Cyprus') : (datum.Country == CountryFilter)"
+    }
+  ],
+  "mark": {"type": "bar", "cornerRadius": 4},
+  "encoding": {
+    "y": {
+      "field": "Country",
+      "type": "nominal",
+      "sort": {"field": "Percentage", "order": "descending"},
+      "title": "Country"
+    },
+    "x": {
+      "field": "Percentage",
+      "type": "quantitative",
+      "title": "% reporting problematic social media use"
+    },
+    "color": {
+      "field": "Gender",
+      "type": "nominal",
+      "scale": {
+        "domain": ["Boy", "Girl"],
+        "range": ["#1f77b4", "#ff69b4"]
+      },
+      "legend": {
+        "title": "Gender"
+      }
+    },
+    "tooltip": [
+      {"field": "Country", "title": "Country"},
+      {"field": "Gender", "title": "Gender"},
+      {"field": "Percentage", "title": "Percentage (%)", "format": ".1f"}
+    ]
+  }
+}

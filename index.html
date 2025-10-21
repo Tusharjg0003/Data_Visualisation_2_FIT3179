@@ -3,1729 +3,295 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adolescent Health and Well-Being: Global Patterns and Digital Behaviour</title>
+  <title>Global Adolescent Health Crisis: Obesity, Inactivity & Digital Addiction</title>
+  <link rel="stylesheet" href="styles.css">
   <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.6;
-      color: #333;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      min-height: 100vh;
-    }
-    
-    .main-container {
-      max-width: 98%;
-      margin: 0 auto;
-      padding: 10px;
-      background: rgba(255, 255, 255, 0.98);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      border-radius: 15px;
-      margin-top: 5px;
-      margin-bottom: 5px;
-    }
-    
-    h1 {
-      font-size: 2.5em;
-      font-weight: 700;
-      color: #2c3e50;
-      text-align: center;
-      margin-bottom: 10px;
-      border-bottom: 3px solid #3498db;
-      padding-bottom: 20px;
-    }
-    
-    h2 {
-      font-size: 1.8em;
-      font-weight: 600;
-      color: #34495e;
-      margin-top: 40px;
-      margin-bottom: 15px;
-    }
-    
-    h3 {
-      font-size: 1.3em;
-      font-weight: 600;
-      color: #34495e;
-      margin-top: 30px;
-      margin-bottom: 10px;
-    }
-    
-    .subtitle {
-      text-align: center;
-      font-size: 1.1em;
-      color: #7f8c8d;
-      margin-bottom: 40px;
-      font-style: italic;
-      max-width: 100%;
-      line-height: 1.6;
-    }
-    
-    .section {
-      background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
-      margin-bottom: 20px;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-      border-left: 6px solid #3498db;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    
-    .section:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    }
-    
-    .section-title {
-      font-size: 2.2em;
-      font-weight: 700;
-      color: #2c3e50;
-      margin-bottom: 30px;
-      text-align: center;
-      padding: 20px 0;
-      border-bottom: 3px solid #3498db;
-    }
-    
-    .section-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: start;
-    }
-    
-    .content-left {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-    
-    .content-right {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-    
-    .chart-full-width {
-      grid-column: 1 / -1;
-    }
-    
-    .trend-chart-layout {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 30px;
-      align-items: start;
-    }
-    
-    .chart-left {
-      display: flex;
-      justify-content: flex-start;
-    }
-    
-    .insight-right {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-    }
-    
-    .overview {
-      font-size: 1.1em;
-      line-height: 1.8;
-      color: #555;
-      margin-bottom: 30px;
-      text-align: left;
-      background: #f8f9fa;
-      padding: 20px;
-      border-left: 4px solid #3498db;
-      border-radius: 4px;
-      max-width: 100%;
-    }
-    
-    .chart-container {
-      margin: 20px 0;
-      text-align: center;
-      background: linear-gradient(145deg, #ffffff 0%, #fdfdfd 100%);
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-      border: 1px solid #e9ecef;
-      transition: box-shadow 0.3s ease;
-    }
-    
-    .chart-container:hover {
-      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-    }
-    
-    .chart-description {
-      max-width: 100%;
-      margin: 15px 0;
-      text-align: center;
-      line-height: 1.6;
-      color: #555;
-      font-size: 0.95em;
-    }
-    
-    p {
-      max-width: 65ch;
-      margin: 15px 0;
-      text-align: justify;
-      hyphens: auto;
-      line-height: 1.6;
-      color: #555;
-    }
-    
-    .overview {
-      max-width: 100%;
-      margin: 20px 0;
-      text-align: left;
-      line-height: 1.7;
-      color: #444;
-      font-size: 1.05em;
-      background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-      padding: 25px;
-      border-radius: 8px;
-      border-left: 4px solid #3498db;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-    
-    .wide-content {
-      max-width: 100%;
-    }
-    
-    #physical-activity-chart {
-      margin-bottom: 0px;
-    }
-    
-    .country-tag {
-      display: inline-block;
-      background: #007bff;
-      color: white;
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-size: 14px;
-      margin: 2px;
-    }
-    
-    .data-indicator {
-      font-size: 12px;
-      font-weight: bold;
-      margin-left: 4px;
-      padding: 2px 4px;
-      border-radius: 3px;
-      background: rgba(255,255,255,0.2);
-    }
-    
-    .chart-title {
-      font-size: 1.4em;
-      font-weight: 600;
-      color: #2c3e50;
-      margin-bottom: 10px;
-      text-align: center;
-    }
-    
-    .chart-description {
-      font-size: 0.95em;
-      color: #7f8c8d;
-      margin-bottom: 20px;
-      font-style: italic;
-      text-align: center;
-    }
-    
-    .insight {
-      background: linear-gradient(135deg, #e8f4fd 0%, #f0f8ff 100%);
-      border-left: 5px solid #3498db;
-      padding: 25px;
-      margin: 20px 0;
-      border-radius: 8px;
-      box-shadow: 0 3px 10px rgba(52, 152, 219, 0.1);
-      max-width: 75ch;
-      text-align: justify;
-      line-height: 1.6;
-      color: #444;
-      font-size: 0.95em;
-    }
-    
-    .insight strong {
-      color: #3498db;
-      font-weight: 600;
-    }
-    
-    .conclusion {
-      background: #fff3cd;
-      border-left: 4px solid #f39c12;
-      padding: 25px;
-      margin-top: 40px;
-      border-radius: 6px;
-      font-size: 1.1em;
-      line-height: 1.8;
-      text-align: left;
-    }
-    
-    .conclusion p {
-      max-width: 100%;
-      text-align: left;
-      line-height: 1.7;
-      color: #333;
-      font-size: 1.05em;
-    }
-    
-    .conclusion h2 {
-      color: #e67e22;
-      margin-top: 0;
-      text-align: center;
-    }
-    
-    .card-container {
-      margin: 20px 0;
-      display: flex;
-      justify-content: center;
-    }
-    
-    .info-card {
-      background: white;
-      border: 1px solid #dee2e6;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      max-width: 800px;
-      width: 100%;
-    }
-    
-    .info-card h3 {
-      margin: 0 0 20px 0;
-      color: #333;
-      font-size: 16px;
-      font-weight: bold;
-      text-align: center;
-    }
-    
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 20px;
-    }
-    
-    .stat-item {
-      text-align: center;
-      padding: 15px;
-      background: #f8f9fa;
-      border-radius: 6px;
-      border-left: 4px solid #007bff;
-    }
-    
-    .stat-value {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
-    
-    .stat-label {
-      font-size: 14px;
-      font-weight: 600;
-      color: #333;
-      margin-bottom: 5px;
-    }
-    
-    .stat-desc {
-      font-size: 12px;
-      color: #666;
-      line-height: 1.4;
-    }
-    
-    .stat-item:nth-child(1) {
-      border-left-color: #E15759;
-    }
-    
-    .stat-item:nth-child(2) {
-      border-left-color: #4F8DBF;
-    }
-    
-    .stat-item:nth-child(3) {
-      border-left-color: #666666;
-    }
-    
-    .stat-item:nth-child(4) {
-      border-left-color: #666666;
-    }
-    
-    .filter-section {
-      background: #f8f9fa;
-      padding: 20px;
-      border-radius: 5px;
-      margin-bottom: 20px;
-    }
-    
-    .filter-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 10px;
-      margin: 15px 0;
-    }
-    
-    .filter-item {
-      display: flex;
-      align-items: center;
-    }
-    
-    .filter-item input {
-      margin-right: 8px;
-    }
-    
-    .filter-buttons {
-      text-align: center;
-      margin-top: 15px;
-    }
-    
-    .btn {
-      background: #007bff;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      margin: 0 5px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    
-    .btn:hover {
-      background: #0056b3;
-    }
-    
-    .btn-secondary {
-      background: #6c757d;
-    }
-    
-    .btn-secondary:hover {
-      background: #545b62;
-    }
-    
-    @media (max-width: 768px) {
-      .section-content {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-      
-      .trend-chart-layout {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-      
-      .main-container {
-        padding: 15px;
-        margin-top: 10px;
-        margin-bottom: 10px;
-      }
-      
-      h1 {
-        font-size: 2em;
-      }
-      
-      .section {
-        padding: 20px;
-      }
-      
-      .card-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
 </head>
 <body>
-  <div class="main-container">
-  <h1>Adolescent Health and Well-Being: Global Patterns and Digital Behaviour</h1>
-  <p class="subtitle">A Comprehensive Analysis of Global Adolescent Health Trends, Physical Activity Patterns, and Digital Behavior</p>
-
-  <!-- Section 1: Global Obesity Among Adolescents -->
-  <div class="section">
-    <h2 class="section-title">🩺 Global Obesity Among Adolescents</h2>
-    
-    <div class="section-content">
-      <div class="content-left">
-    <div class="overview">
-          Adolescent obesity has reached crisis proportions globally. 
-          Our analysis of 192 countries reveals obesity rates 
-          now average 10.2% among 5-19 year olds. 
-          Rates range from 0.8% to a staggering 41.0%. 
-          Five Pacific Island nations exceed 30% prevalence. 
-          The Cook Islands leads at 41.0%. 
-          More alarmingly, our longitudinal analysis shows concerning trends. 
-          191 out of 192 countries experienced increasing obesity rates 
-          between 1990-2022. The average increase was 7.4 percentage points 
-          per country. This section explores spatial distribution patterns. 
-          We examine gender disparities and long-term trends. 
-          These reveal a global health emergency affecting the next generation.
+  <div class="container">
+    <div class="header">
+      <h1>Global Adolescent Health Crisis</h1>
+      <div class="subtitle">Obesity, Physical Inactivity & Digital Addiction Trends</div>
     </div>
 
-        <div class="insight">
-          <strong>Key Insight:</strong> The global obesity map reveals 
-          a disturbing pattern. Pacific Island nations face the 
-          most severe crisis. The Cook Islands (41.0%), Niue 
-          (40.6%), and Nauru (36.0%) lead a cluster. 
-          Over one-third of adolescents are obese in 
-          these nations. This geographical concentration suggests important factors. 
-          Environmental and cultural factors beyond simple economic development 
-          play crucial roles in adolescent health outcomes.
+    <div class="content">
+      <!-- Key Statistics Overview -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">192</div>
+          <div class="stat-label">Countries Analyzed</div>
+          </div>
+        <div class="stat-card">
+          <div class="stat-number">10.2%</div>
+          <div class="stat-label">Global Obesity Rate</div>
+          </div>
+        <div class="stat-card">
+          <div class="stat-number">83.5%</div>
+          <div class="stat-label">Physical Inactivity</div>
+          </div>
+        <div class="stat-card">
+          <div class="stat-number">191</div>
+          <div class="stat-label">Countries with Rising Obesity</div>
+          </div>
+          </div>
+
+      <!-- Section 1: Global Obesity Crisis -->
+      <div class="section">
+        <h2 class="section-title">🌍 Global Obesity Epidemic</h2>
+        <div class="section-content">
+          <div class="text-content">
+            <div class="overview">
+              Adolescent obesity has reached crisis proportions 
+              across all continents. Our analysis reveals obesity 
+              rates now average <span class="highlight-stat">10.2%</span> among 
+              5-19 year olds, ranging from <span class="highlight-stat">0.8%</span> 
+              to <span class="highlight-stat">41.0%</span>. Five Pacific Island 
+              nations exceed <span class="highlight-stat">30%</span> prevalence. 
+              More alarmingly, <span class="highlight-stat">191 out of 192</span> 
+              countries experienced increasing obesity rates between 
+              1990-2022, with an average increase of <span class="highlight-stat">7.4</span> 
+              percentage points per country.
+          </div>
+            <div class="insight">
+              <strong>Key Finding:</strong> This reveals a global 
+              health emergency affecting the next generation. 
+              Pacific Island nations face the highest rates, 
+              with Cook Islands at <span class="highlight-stat">41.0%</span> 
+              and Niue at <span class="highlight-stat">40.6%</span>. 
+              The systematic nature of this increase suggests 
+              fundamental changes in global adolescent lifestyle.
+          </div>
+          </div>
+          <div class="chart-content">
+            <div class="chart-header">
+              <h3 class="chart-title">Global Obesity Prevalence Map</h3>
+              <p class="chart-description">Interactive choropleth map displaying countries color-coded by adolescent obesity rates, with darker red colors indicating higher prevalence. Hover over countries to view detailed statistics including prevalence rates, confidence intervals, and risk classifications. The map reveals significant geographic patterns in adolescent obesity distribution across global regions.</p>
         </div>
+            <div id="map"></div>
       </div>
-      
-      <div class="content-right">
-    <div class="chart-container">
-          <h3 class="chart-title">Global Obesity Map</h3>
-          <p class="chart-description">Visualises obesity prevalence by country using choropleth mapping techniques. Countries are color-coded by obesity rates with darker reds indicating higher prevalence. Hover over countries for detailed statistics including prevalence rates and confidence intervals.</p>
-      <div id="map"></div>
-          </div>
-          </div>
-      </div>
-      
-    <div class="chart-container chart-full-width">
-      <div class="card-container">
-        <div class="info-card">
-          <h3>Gender Disparity Insights</h3>
-          <div class="card-grid">
-            <div class="stat-item">
-              <div class="stat-value" style="color: #E15759;">30%</div>
-              <div class="stat-label">Female Higher Risk</div>
-              <div class="stat-desc">of countries show higher obesity rates among adolescent girls</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-value" style="color: #4F8DBF;">70%</div>
-              <div class="stat-label">Male Higher Risk</div>
-              <div class="stat-desc">of countries show higher obesity rates among adolescent boys</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-value" style="color: #666666;">1.9%</div>
-              <div class="stat-label">Average Gender Gap</div>
-              <div class="stat-desc">average difference favoring males globally</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-value" style="color: #666666;">192</div>
-              <div class="stat-label">Total Countries</div>
-              <div class="stat-desc">countries with available gender-specific obesity data</div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
-      
-      <div class="filter-section">
-      <h4>Select Countries for Trend Comparison</h4>
-      <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 15px;">
-        <div>
-          <label for="country-select" style="font-weight: 600; margin-right: 10px;">Add Country:</label>
-          <select id="country-select" style="padding: 8px; border: 1px solid #ccc; border-radius: 4px; min-width: 250px;">
-            <option value="">Choose a country...</option>
-            <optgroup label="Major Countries">
-              <option value="USA">United States</option>
-              <option value="CHN">China</option>
-              <option value="IND">India</option>
-              <option value="BRA">Brazil</option>
-              <option value="MEX">Mexico</option>
-              <option value="DEU">Germany</option>
-              <option value="GBR">United Kingdom</option>
-              <option value="FRA">France</option>
-              <option value="JPN">Japan</option>
-              <option value="RUS">Russian Federation</option>
-              <option value="CAN">Canada</option>
-              <option value="AUS">Australia</option>
-              <option value="ITA">Italy</option>
-              <option value="ESP">Spain</option>
-              <option value="KOR">Republic of Korea</option>
-              <option value="TUR">Turkey</option>
-              <option value="SAU">Saudi Arabia</option>
-              <option value="ARG">Argentina</option>
-              <option value="POL">Poland</option>
-              <option value="NLD">Netherlands</option>
-              <option value="BGD">Bangladesh</option>
-              <option value="IDN">Indonesia</option>
-              <option value="PAK">Pakistan</option>
-              <option value="NGA">Nigeria</option>
-              <option value="ZAF">South Africa</option>
-              <option value="EGY">Egypt</option>
-            </optgroup>
-            <optgroup label="All Countries (A-C)">
-              <option value="AFG">Afghanistan</option>
-              <option value="AGO">Angola</option>
-              <option value="ALB">Albania</option>
-              <option value="AND">Andorra</option>
-              <option value="ARE">United Arab Emirates</option>
-              <option value="ARM">Armenia</option>
-              <option value="ATG">Antigua and Barbuda</option>
-              <option value="AUT">Austria</option>
-              <option value="AZE">Azerbaijan</option>
-              <option value="BDI">Burundi</option>
-              <option value="BEL">Belgium</option>
-              <option value="BEN">Benin</option>
-              <option value="BFA">Burkina Faso</option>
-              <option value="BGR">Bulgaria</option>
-              <option value="BHR">Bahrain</option>
-              <option value="BHS">Bahamas</option>
-              <option value="BIH">Bosnia and Herzegovina</option>
-              <option value="BLR">Belarus</option>
-              <option value="BLZ">Belize</option>
-              <option value="BOL">Bolivia</option>
-              <option value="BRB">Barbados</option>
-              <option value="BRN">Brunei Darussalam</option>
-              <option value="BTN">Bhutan</option>
-              <option value="BWA">Botswana</option>
-              <option value="CAF">Central African Republic</option>
-              <option value="CHE">Switzerland</option>
-              <option value="CHL">Chile</option>
-              <option value="CIV">Côte d'Ivoire</option>
-              <option value="CMR">Cameroon</option>
-              <option value="COD">Democratic Republic of the Congo</option>
-              <option value="COG">Congo</option>
-              <option value="COK">Cook Islands</option>
-              <option value="COL">Colombia</option>
-              <option value="COM">Comoros</option>
-              <option value="CPV">Cabo Verde</option>
-              <option value="CRI">Costa Rica</option>
-              <option value="CUB">Cuba</option>
-              <option value="CYP">Cyprus</option>
-              <option value="CZE">Czechia</option>
-            </optgroup>
-            <optgroup label="All Countries (D-J)">
-              <option value="DJI">Djibouti</option>
-              <option value="DMA">Dominica</option>
-              <option value="DNK">Denmark</option>
-              <option value="DOM">Dominican Republic</option>
-              <option value="DZA">Algeria</option>
-              <option value="ECU">Ecuador</option>
-              <option value="ERI">Eritrea</option>
-              <option value="EST">Estonia</option>
-              <option value="ETH">Ethiopia</option>
-              <option value="FIN">Finland</option>
-              <option value="FJI">Fiji</option>
-              <option value="FSM">Micronesia</option>
-              <option value="GAB">Gabon</option>
-              <option value="GEO">Georgia</option>
-              <option value="GHA">Ghana</option>
-              <option value="GIN">Guinea</option>
-              <option value="GMB">Gambia</option>
-              <option value="GNB">Guinea-Bissau</option>
-              <option value="GNQ">Equatorial Guinea</option>
-              <option value="GRC">Greece</option>
-              <option value="GRD">Grenada</option>
-              <option value="GTM">Guatemala</option>
-              <option value="GUY">Guyana</option>
-              <option value="HND">Honduras</option>
-              <option value="HRV">Croatia</option>
-              <option value="HTI">Haiti</option>
-              <option value="HUN">Hungary</option>
-              <option value="IRL">Ireland</option>
-              <option value="IRN">Iran</option>
-              <option value="IRQ">Iraq</option>
-              <option value="ISL">Iceland</option>
-              <option value="ISR">Israel</option>
-              <option value="JAM">Jamaica</option>
-              <option value="JOR">Jordan</option>
-            </optgroup>
-            <optgroup label="All Countries (K-M)">
-              <option value="KAZ">Kazakhstan</option>
-              <option value="KEN">Kenya</option>
-              <option value="KGZ">Kyrgyzstan</option>
-              <option value="KHM">Cambodia</option>
-              <option value="KIR">Kiribati</option>
-              <option value="KNA">Saint Kitts and Nevis</option>
-              <option value="KWT">Kuwait</option>
-              <option value="LAO">Lao People's Democratic Republic</option>
-              <option value="LBN">Lebanon</option>
-              <option value="LBR">Liberia</option>
-              <option value="LBY">Libya</option>
-              <option value="LCA">Saint Lucia</option>
-              <option value="LKA">Sri Lanka</option>
-              <option value="LSO">Lesotho</option>
-              <option value="LTU">Lithuania</option>
-              <option value="LUX">Luxembourg</option>
-              <option value="LVA">Latvia</option>
-              <option value="MAR">Morocco</option>
-              <option value="MCO">Monaco</option>
-              <option value="MDA">Moldova</option>
-              <option value="MDG">Madagascar</option>
-              <option value="MDV">Maldives</option>
-              <option value="MHL">Marshall Islands</option>
-              <option value="MKD">North Macedonia</option>
-              <option value="MLI">Mali</option>
-              <option value="MLT">Malta</option>
-              <option value="MMR">Myanmar</option>
-              <option value="MNE">Montenegro</option>
-              <option value="MNG">Mongolia</option>
-              <option value="MOZ">Mozambique</option>
-              <option value="MRT">Mauritania</option>
-              <option value="MUS">Mauritius</option>
-              <option value="MWI">Malawi</option>
-              <option value="MYS">Malaysia</option>
-            </optgroup>
-            <optgroup label="All Countries (N-S)">
-              <option value="NAM">Namibia</option>
-              <option value="NER">Niger</option>
-              <option value="NIC">Nicaragua</option>
-              <option value="NIU">Niue</option>
-              <option value="NOR">Norway</option>
-              <option value="NPL">Nepal</option>
-              <option value="NRU">Nauru</option>
-              <option value="NZL">New Zealand</option>
-              <option value="OMN">Oman</option>
-              <option value="PAN">Panama</option>
-              <option value="PER">Peru</option>
-              <option value="PHL">Philippines</option>
-              <option value="PLW">Palau</option>
-              <option value="PNG">Papua New Guinea</option>
-              <option value="PRK">Democratic People's Republic of Korea</option>
-              <option value="PRT">Portugal</option>
-              <option value="PRY">Paraguay</option>
-              <option value="QAT">Qatar</option>
-              <option value="ROU">Romania</option>
-              <option value="RWA">Rwanda</option>
-              <option value="SDN">Sudan</option>
-              <option value="SEN">Senegal</option>
-              <option value="SGP">Singapore</option>
-              <option value="SLB">Solomon Islands</option>
-              <option value="SLE">Sierra Leone</option>
-              <option value="SLV">El Salvador</option>
-              <option value="SMR">San Marino</option>
-              <option value="SOM">Somalia</option>
-              <option value="SRB">Serbia</option>
-              <option value="SSD">South Sudan</option>
-              <option value="STP">Sao Tome and Principe</option>
-              <option value="SUR">Suriname</option>
-              <option value="SVK">Slovakia</option>
-              <option value="SVN">Slovenia</option>
-              <option value="SWE">Sweden</option>
-              <option value="SWZ">Eswatini</option>
-              <option value="SYC">Seychelles</option>
-              <option value="SYR">Syrian Arab Republic</option>
-            </optgroup>
-            <optgroup label="All Countries (T-Z)">
-              <option value="TCD">Chad</option>
-              <option value="TGO">Togo</option>
-              <option value="THA">Thailand</option>
-              <option value="TJK">Tajikistan</option>
-              <option value="TKM">Turkmenistan</option>
-              <option value="TLS">Timor-Leste</option>
-              <option value="TON">Tonga</option>
-              <option value="TTO">Trinidad and Tobago</option>
-              <option value="TUN">Tunisia</option>
-              <option value="TUV">Tuvalu</option>
-              <option value="TZA">United Republic of Tanzania</option>
-              <option value="UGA">Uganda</option>
-              <option value="UKR">Ukraine</option>
-              <option value="URY">Uruguay</option>
-              <option value="UZB">Uzbekistan</option>
-              <option value="VCT">Saint Vincent and the Grenadines</option>
-              <option value="VEN">Venezuela</option>
-              <option value="VNM">Viet Nam</option>
-              <option value="VUT">Vanuatu</option>
-              <option value="WSM">Samoa</option>
-              <option value="YEM">Yemen</option>
-              <option value="ZMB">Zambia</option>
-              <option value="ZWE">Zimbabwe</option>
-            </optgroup>
-          </select>
-          <button class="btn" onclick="addSelectedCountry()" style="margin-left: 10px;">Add</button>
-          </div>
-          </div>
-      <div id="selected-countries" style="margin-bottom: 15px; min-height: 40px; padding: 10px; background: #f8f9fa; border-radius: 4px; border: 1px solid #dee2e6;">
-        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-          <span class="country-tag" data-country="USA">United States <span class="data-indicator" title="Obesity: Complete (1990-2022) | Physical Activity: Complete (2001-2016)">✓✓</span> <button onclick="removeCountry('USA')" style="margin-left: 5px; background: none; border: none; color: #666; cursor: pointer;">×</button></span>
-          <span class="country-tag" data-country="CHN">China <span class="data-indicator" title="Obesity: Complete (1990-2022) | Physical Activity: Complete (2001-2016)">✓✓</span> <button onclick="removeCountry('CHN')" style="margin-left: 5px; background: none; border: none; color: #666; cursor: pointer;">×</button></span>
-          <span class="country-tag" data-country="IND">India <span class="data-indicator" title="Obesity: Complete (1990-2022) | Physical Activity: Limited (2001-2016)">✓△</span> <button onclick="removeCountry('IND')" style="margin-left: 5px; background: none; border: none; color: #666; cursor: pointer;">×</button></span>
-          </div>
-        <div style="margin-top: 10px; font-size: 12px; color: #666;">
-          <strong>Data Availability:</strong> 
-          <span style="color: #28a745;">✓✓ Complete data for both charts</span> | 
-          <span style="color: #ffc107;">✓△ Limited data for physical activity</span> | 
-          <span style="color: #dc3545;">✓✗ Complete obesity data, no physical activity data</span>
-          </div>
-        </div>
-        <div class="filter-buttons">
-        <button class="btn" onclick="updateTrendChart()">Update Obesity Chart</button>
-        <button class="btn" onclick="updatePhysicalActivityChart()">Update Activity Chart</button>
-        <button class="btn btn-secondary" onclick="clearAllCountries()">Clear All</button>
-        </div>
-      </div>
-      
-    <div class="chart-container">
-      <h3 class="chart-title">Obesity Trends Over Time</h3>
-      <p class="chart-description">Shows the growth of obesity from 1990–2022 across selected countries.</p>
-      
-      <div class="trend-chart-layout">
-        <div class="chart-left">
-      <div id="trend-chart"></div>
-        </div>
-        <div class="insight-right">
+
+      <!-- Section 2: Physical Inactivity Foundation -->
+      <div class="section">
+        <h2 class="section-title">🏃 Physical Inactivity Crisis</h2>
+        <div class="section-content">
+          <div class="text-content">
+            <div class="overview">
+              The obesity crisis finds its roots in physical 
+              inactivity. Our analysis of <span class="highlight-stat">6,567 records</span> 
+              reveals that physical inactivity among 11-17 year 
+              olds averages <span class="highlight-stat">83.5%</span>, ranging from 
+              <span class="highlight-stat">66.1%</span> to <span class="highlight-stat">94.2%</span>. 
+              In some regions, virtually all adolescents are 
+              insufficiently active. This represents a fundamental 
+              shift in how young people live and move.
+            </div>
       <div class="insight">
-            <strong>Key Insight:</strong> The temporal analysis reveals a 
-            global epidemic in slow motion. Virtually every country 
-            (191 out of 192) has experienced rising adolescent 
-            obesity since 1990. The average increase was 
-            7.4 percentage points over three decades. This represents 
-            not isolated incidents but systematic failure. Global health 
-            systems have failed to address the fundamental drivers 
-            of adolescent obesity.
-          </div>
+              <strong>Critical Insight:</strong> Physical inactivity has 
+              reached epidemic proportions, fundamentally reshaping 
+              how young people live and move throughout the world. 
+              In some regions, this figure approaches <span class="highlight-stat">94%</span>. 
+              This means virtually no adolescents meet basic 
+              physical activity guidelines established by health 
+              organizations. We are creating a generation that is 
+              both sedentary and at unprecedented risk for chronic 
+              diseases including diabetes, cardiovascular conditions, 
+              and mental health disorders. This crisis represents 
+              a complete transformation of adolescent lifestyle patterns.
+            </div>
+            </div>
+          <div class="chart-content">
+            <div class="chart-header">
+              <h3 class="chart-title">Physical Inactivity Trends</h3>
+              <p class="chart-description">Interactive line chart displaying physical inactivity trends across selected countries from 2001-2016. Features focus+context brush-to-zoom functionality allowing detailed examination of specific time periods. Shows the dramatic rise in adolescent physical inactivity rates across different nations, revealing the global nature of this health crisis.</p>
+            </div>
+            <div id="physical-activity-chart"></div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Section 2: Physical Inactivity and Lifestyle Factors -->
+      <!-- Section 3: Digital Behavior Revolution -->
+      <div class="section">
+        <h2 class="section-title">💻 Digital Behavior Revolution</h2>
+        <div class="section-content">
+          <div class="text-content">
+            <div class="overview">
+              The digital revolution has introduced new behavioral 
+              risk factors. Screens, gaming, and social media 
+              create new pathways to addiction, directly competing 
+              with physical activity. Our analysis reveals a 
+              dramatic gender-based digital divide that has 
+              completely reversed over time. In 2014, <span class="gender-male">boys</span> 
+              dominated gaming with <span class="highlight-stat">54.4%</span> spending 
+              excessive time versus <span class="highlight-stat">30.0%</span> of 
+              <span class="gender-female">girls</span>.
+          </div>
+            <div class="insight">
+              <strong>Remarkable Reversal:</strong> By 2022, this pattern 
+              completely reversed, representing one of the most significant 
+              behavioral shifts in adolescent digital engagement history. 
+              <span class="gender-female">Girls</span> now show 
+              <span class="highlight-stat">14.1%</span> problematic social media 
+              usage versus <span class="highlight-stat">8.4%</span> for 
+              <span class="gender-male">boys</span>. This represents a complete 
+              inversion with <span class="gender-female">girls</span> now at 
+              higher risk in <span class="highlight-stat">93%</span> of countries 
+              (40 out of 43 analyzed). This dramatic shift from male-dominated 
+              gaming to female-dominated social media addiction suggests that 
+              digital platforms create gender-specific engagement patterns.
+          </div>
+          </div>
+          <div class="chart-content">
+            <div class="chart-header">
+              <h3 class="chart-title">Screen & Gaming Time (2014)</h3>
+              <p class="chart-description">Comparative bar chart showing gender differences in excessive gaming behavior across 41 European countries in 2014. <span class="gender-male">Boys</span> spent significantly more time gaming than <span class="gender-female">girls</span>, with <span class="highlight-stat">54.4% vs 30.0%</span> showing excessive behavior (≥2 hours daily). This represents a 24.4 percentage point gender gap favoring males in gaming addiction patterns.</p>
+          </div>
+            <div id="gaming-chart"></div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Section 4: Social Media Addiction -->
   <div class="section">
-    <h2 class="section-title">🏃 Physical Inactivity and Lifestyle Factors</h2>
-    
-    <div class="section-content">
-      <div class="content-left">
+        <h2 class="section-title">📱 Social Media Addiction (2022)</h2>
+        <div class="section-content">
+          <div class="text-content">
     <div class="overview">
-          The obesity crisis finds its roots in 
-          a parallel epidemic of physical inactivity. 
-          Our analysis of 6,567 records across multiple 
-          countries reveals concerning statistics. Physical inactivity 
-          among 11-17 year olds averages a staggering 83.5%. 
-          Rates range from 63.2% to 97.2%. 
-          This means that in some regions, virtually 
-          all adolescents are insufficiently active. 
-          The relationship between inactivity and obesity 
-          is not merely correlational. It represents a 
-          fundamental shift in how young people live. 
-          It affects how they move and engage 
-          with their environment. Physical inactivity is 
-          just one piece of a larger puzzle. 
-          The digital revolution has introduced new behavioral patterns. 
-          These further compound this sedentary crisis. 
-          They create a perfect storm of risk 
-          factors threatening adolescent health worldwide.
+              By 2022, the digital landscape had transformed 
+              completely. Social media platforms created new 
+              addiction patterns that favor <span class="gender-female">female</span> 
+              engagement. Across 43 European countries, <span class="gender-female">girls</span> 
+              consistently show higher problematic social media 
+              usage than <span class="gender-male">boys</span>. This shift from 
+              <span class="gender-male">male-dominated gaming</span> to <span class="gender-female">female-dominated</span> 
+              social media represents a fundamental transformation 
+              in adolescent digital behavior.
     </div>
-
-        <div class="insight">
-          <strong>Key Insight:</strong> Physical inactivity has reached epidemic 
-          proportions. Our data shows that 83.5% of 
-          adolescents globally are insufficiently active. In some 
-          regions, this figure approaches 97%. This means 
-          virtually no adolescents meet basic physical activity guidelines. 
-          This represents a fundamental transformation in adolescent behavior. 
-          It directly fuels the obesity crisis. We are 
-          creating a generation that is both sedentary and 
-          at unprecedented risk for chronic diseases.
+            <div class="insight">
+              <strong>Platform-Specific Patterns:</strong> Digital platforms 
+              create distinct gender-specific addiction patterns that reflect 
+              fundamental differences in how adolescents engage with technology. 
+              Gaming platforms favor <span class="gender-male">male engagement</span> 
+              while social media platforms favor <span class="gender-female">female</span> 
+              engagement, creating unique risk profiles for each gender. This suggests 
+              that addiction mechanisms differ significantly between platforms, 
+              requiring gender-specific and platform-aware intervention strategies. 
+              Understanding these patterns is crucial for developing effective 
+              prevention and treatment approaches.
+          </div>
+          </div>
+          <div class="chart-content">
+            <div class="chart-header">
+              <h3 class="chart-title">Problematic Social Media Use</h3>
+              <p class="chart-description">Comparative bar chart showing gender differences in problematic social media use across 43 European countries in 2022. <span class="gender-female">Girls</span> report significantly higher problematic use than <span class="gender-male">boys</span>, with <span class="highlight-stat">14.1% vs 8.4%</span> showing addiction signs. This represents a complete reversal from the 2014 gaming pattern, with a 5.7 percentage point gap favoring females in social media addiction.</p>
+          </div>
+            <div id="social-media-chart"></div>
+          </div>
         </div>
       </div>
       
-      <div class="content-right">
-        <div class="chart-container">
-          <h3 class="chart-title">Physical Inactivity Trends</h3>
-          <p class="chart-description">Shows physical inactivity trends across selected countries (2001–2016). Use the filter above to select countries for comparison.</p>
-      <div id="physical-activity-chart"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Section 3: Digital Lifestyles and Emerging Risks -->
+      <!-- Section 5: Obesity Trends Over Time -->
   <div class="section">
-    <h2 class="section-title">💻 Digital Lifestyles and Emerging Risks</h2>
-    
+        <h2 class="section-title">📈 Obesity Trends Over Time</h2>
+        <div class="section-content">
+          <div class="text-content">
     <div class="overview">
-      While physical inactivity represents the foundation of the adolescent health crisis, the digital revolution has introduced new behavioral risk factors that fundamentally alter how adolescents spend their time. The proliferation of screens, gaming, and social media creates new pathways to both entertainment and addiction, directly competing with physical activity. Our analysis reveals a dramatic gender-based digital divide that has completely reversed over time. In 2014, boys dominated gaming with 54.4% spending excessive time on games compared to only 30.0% of girls, creating a 24.3 percentage point gap across 41 countries. However, by 2022, this pattern completely reversed as girls now show 14.1% problematic social media usage versus 8.4% for boys, representing a 5.7 percentage point gap favoring females. A remarkable reversal has occurred in digital behavior where girls now lead in problematic digital engagement, showing 14.1% signs of social media addiction versus 8.4% for boys. This represents a complete inversion of the 2014 gaming pattern, with girls now at higher risk in 93% of countries (40 out of 43). This shift from gaming (male-dominated) to social media (female-dominated) suggests that digital platforms themselves may create gender-specific addiction patterns, fundamentally changing how adolescents interact with technology. Digital behaviors have evolved significantly from recreational gaming to addictive social media consumption, creating additional layers of risk that compound the physical inactivity crisis and threaten the next generation's health.
+              The temporal analysis reveals a global epidemic 
+              in slow motion. Virtually every country has 
+              experienced rising adolescent obesity since 1990. 
+              The average increase was <span class="highlight-stat">7.4 percentage</span> 
+              points over three decades. This represents not 
+              isolated incidents but systematic failure. Global 
+              health systems have failed to address fundamental 
+              drivers of adolescent obesity.
     </div>
-
-    <div class="chart-container">
-      <h3 class="chart-title">Screen & Gaming Time</h3>
-      <p class="chart-description">Proportion of youth spending ≥2 hours daily on games.</p>
-      
-      <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px; font-size: 14px;">
-        <strong>📊 Data Coverage:</strong> 41 European countries (2014 only) | 
-        <span style="color: #ffc107;">⚠️ Limited geographic scope</span>
-      </div>
-      
-      <div class="filter-section">
-        <h4>Select Countries for Digital Behavior Comparison</h4>
-        <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 15px;">
-          <div>
-            <label for="digital-country-select" style="font-weight: 600; margin-right: 10px;">Add Country:</label>
-            <select id="digital-country-select" style="padding: 8px; border: 1px solid #ccc; border-radius: 4px; min-width: 250px;">
-              <option value="">Choose a country...</option>
-              <optgroup label="Major European Countries">
-                <option value="DEU">Germany</option>
-                <option value="FRA">France</option>
-                <option value="GBR">United Kingdom</option>
-                <option value="ITA">Italy</option>
-                <option value="ESP">Spain</option>
-                <option value="CAN">Canada</option>
-              </optgroup>
-              <optgroup label="All Available Countries (A-G)">
-                <option value="ALB">Albania</option>
-                <option value="ARM">Armenia</option>
-                <option value="AUT">Austria</option>
-                <option value="BE-VLG">Belgium (Flanders)</option>
-                <option value="BE-WAL">Belgium (Wallonia)</option>
-                <option value="BGR">Bulgaria</option>
-                <option value="CHE">Switzerland</option>
-                <option value="CZE">Czech Republic</option>
-                <option value="DNK">Denmark</option>
-                <option value="EST">Estonia</option>
-                <option value="FIN">Finland</option>
-                <option value="GRC">Greece</option>
-              </optgroup>
-              <optgroup label="All Available Countries (H-P)">
-                <option value="HRV">Croatia</option>
-                <option value="HUN">Hungary</option>
-                <option value="IRL">Ireland</option>
-                <option value="ISL">Iceland</option>
-                <option value="ISR">Israel</option>
-                <option value="LTU">Lithuania</option>
-                <option value="LUX">Luxembourg</option>
-                <option value="LVA">Latvia</option>
-                <option value="MDA">Moldova</option>
-                <option value="MKD">North Macedonia</option>
-                <option value="MLT">Malta</option>
-                <option value="NLD">Netherlands</option>
-                <option value="NOR">Norway</option>
-                <option value="POL">Poland</option>
-                <option value="PRT">Portugal</option>
-              </optgroup>
-              <optgroup label="All Available Countries (R-U)">
-                <option value="ROU">Romania</option>
-                <option value="RUS">Russia</option>
-                <option value="SVK">Slovakia</option>
-                <option value="SVN">Slovenia</option>
-                <option value="SWE">Sweden</option>
-                <option value="UKR">Ukraine</option>
-              </optgroup>
-            </select>
-            <button class="btn" onclick="addDigitalCountry()" style="margin-left: 10px;">Add</button>
-          </div>
-        </div>
-        <div id="digital-selected-countries" style="margin-bottom: 15px; min-height: 40px; padding: 10px; background: #f8f9fa; border-radius: 4px; border: 1px solid #dee2e6;">
-          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-            <span class="country-tag" data-country="DEU">Germany <span class="data-indicator" title="Gaming: Available (2014) | Social Media: Available (2022)">✓✓</span> <button onclick="removeDigitalCountry('DEU')" style="margin-left: 5px; background: none; border: none; color: #666; cursor: pointer;">×</button></span>
-            <span class="country-tag" data-country="FRA">France <span class="data-indicator" title="Gaming: Available (2014) | Social Media: Available (2022)">✓✓</span> <button onclick="removeDigitalCountry('FRA')" style="margin-left: 5px; background: none; border: none; color: #666; cursor: pointer;">×</button></span>
-            <span class="country-tag" data-country="GBR">United Kingdom <span class="data-indicator" title="Gaming: Available (2014) | Social Media: Available (2022)">✓✓</span> <button onclick="removeDigitalCountry('GBR')" style="margin-left: 5px; background: none; border: none; color: #666; cursor: pointer;">×</button></span>
-          </div>
-          <div style="margin-top: 10px; font-size: 12px; color: #666;">
-            <strong>Data Availability:</strong> 
-            <span style="color: #28a745;">✓✓ Complete data for both digital charts</span> | 
-            <span style="color: #ffc107;">✓△ Gaming data only (2014)</span> | 
-            <span style="color: #dc3545;">△✓ Social media data only (2022)</span>
-          </div>
-        </div>
-        <div class="filter-buttons">
-          <button class="btn" onclick="updateGamingChart()">Update Gaming Chart</button>
-          <button class="btn" onclick="updateSocialMediaChart()">Update Social Media Chart</button>
-          <button class="btn btn-secondary" onclick="clearAllDigitalCountries()">Clear All</button>
-        </div>
-      </div>
-      
-      <div class="trend-chart-layout">
-        <div class="chart-left">
-      <div id="screen-gaming-chart"></div>
-        </div>
-        <div class="insight-right">
       <div class="insight">
-            <strong>Key Insight:</strong> The 2014 gaming data reveals a 
-            stark gender divide that held universally. Across all 
-            41 countries, boys consistently showed higher gaming engagement. 
-            An average of 54.4% spent excessive time on games 
-            versus 30.0% of girls. This created a 
-            24.3 percentage point gap. This represents one of 
-            the most consistent gender differences in adolescent behavior. 
-            Early digital behaviors were heavily skewed toward male 
-            engagement with gaming platforms.
-          </div>
-        </div>
+              <strong>Systemic Failure:</strong> The consistency of 
+              rising trends across diverse countries with vastly different 
+              economic, cultural, and healthcare systems suggests 
+              that traditional public health approaches, 
+              focused on single risk factors in isolation, are fundamentally 
+              insufficient to address this crisis. We need comprehensive, 
+              integrated policy responses that address 
+              the complex, interconnected challenges facing 
+              today's youth, including nutrition education, physical activity 
+              promotion, digital wellness programs, and community-based 
+              interventions that work across multiple sectors simultaneously.
       </div>
     </div>
-
-    <div class="chart-container">
-      <h3 class="chart-title">Problematic Social Media Use</h3>
-      <p class="chart-description">Share of 15-year-olds showing problematic use patterns.</p>
-      
-      <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px; font-size: 14px;">
-        <strong>📊 Data Coverage:</strong> 43 European countries (2022 only) | 
-        <span style="color: #ffc107;">⚠️ Limited geographic scope</span>
-      </div>
-      
-      <div style="background: #fff3cd; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 6px solid #ffc107; border: 2px solid #ffc107;">
-        <h4 style="margin: 0 0 15px 0; color: #856404; font-size: 1.1em; font-weight: bold;">🔧 Gender Filter Controls</h4>
-        <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
-          <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 500;">
-            <input type="checkbox" id="show-girls" checked onchange="updateSocialMediaGenderFilter()" style="transform: scale(1.2);">
-            <span style="color: #e91e63; font-size: 1em;">● Girls (Pink)</span>
-          </label>
-          <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 500;">
-            <input type="checkbox" id="show-boys" checked onchange="updateSocialMediaGenderFilter()" style="transform: scale(1.2);">
-            <span style="color: #2196f3; font-size: 1em;">● Boys (Blue)</span>
-          </label>
-          <button onclick="toggleAllGenders()" style="background: #ffc107; color: #856404; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 14px; font-weight: bold;">🔄 Toggle All</button>
+          <div class="chart-content">
+            <div class="chart-header">
+              <h3 class="chart-title">Obesity Trends</h3>
+              <p class="chart-description">Interactive line chart displaying obesity growth trends from 1990-2022 across selected countries. Features focus+context brush-to-zoom functionality for detailed time period analysis. Reveals the systematic and consistent rise in adolescent obesity rates across diverse nations, demonstrating the global nature of this health epidemic over three decades.</p>
+  </div>
+            <div id="trend-chart"></div>
         </div>
-        <div style="font-size: 13px; color: #856404; margin-top: 10px; font-style: italic;">
-          <strong>💡 Tip:</strong> Uncheck a gender to focus on specific patterns or compare individual gender trends.
         </div>
       </div>
       
-      <div class="trend-chart-layout">
-        <div class="chart-left">
-      <div id="social-media-chart"></div>
-        </div>
-        <div class="insight-right">
+      <!-- Conclusion -->
+  <div class="section">
+        <h2 class="section-title">🎯 Conclusion</h2>
+        <div class="text-content">
+    <div class="overview">
+            The data reveals a perfect storm converging on 
+            adolescent health. A global obesity epidemic affects 
+            <span class="highlight-stat">191 out of 192</span> countries, driven by 
+            unprecedented physical inactivity rates averaging 
+            <span class="highlight-stat">83.5%</span>, and compounded by rapidly 
+            evolving digital addiction patterns. Physical inactivity 
+            creates the foundation for obesity, while digital 
+            behaviors compete with physical activity and introduce 
+            new addictive patterns.
+    </div>
       <div class="insight">
-            <strong>Key Insight:</strong> By 2022, the gender dynamics in 
-            digital behavior had completely reversed. Girls now 
-            lead in problematic social media use across 93% 
-            of countries (40 out of 43). An average of 
-            14.1% showed signs of addiction versus 8.4% 
-            of boys. This created a 5.7 percentage point 
-            gap. This represents a complete inversion from the 
-            2014 gaming pattern where boys dominated. This shift 
-            suggests that different digital platforms create gender-specific 
-            engagement patterns. This fundamentally changes how adolescents 
-            interact with technology over time. The transformation from 
-            gaming dominance (male) to social media dominance (female) 
-            reveals platform-specific behavioral patterns. Social media platforms 
-            appear to be more engaging for girls, while gaming 
-            platforms historically attracted boys. This has profound 
-            implications for digital health interventions. Strategies must 
-            be gender-specific and platform-aware. The data suggests that 
-            addiction mechanisms differ between platforms. Understanding these 
-            patterns is crucial for developing effective prevention 
-            strategies that address the unique risks faced 
-            by each gender in the digital landscape.
-          </div>
-        </div>
+            <strong>Integrated Response Needed:</strong> The convergence 
+            of these three crises creates an urgent need 
+            for integrated policy responses that address 
+            the systemic changes reshaping adolescent life. 
+            Traditional approaches focused on single risk 
+            factors are insufficient for addressing these 
+            complex, interconnected challenges facing today's youth.
+      </div>
+    </div>
       </div>
     </div>
   </div>
 
-  <!-- Conclusion -->
-  <div class="conclusion">
-    <h2>🌍 Conclusion</h2>
-    <p>The data reveals a perfect storm converging on adolescent health: a global obesity epidemic affecting 191 out of 192 countries, driven by unprecedented physical inactivity rates averaging 83.5%, and compounded by rapidly evolving digital addiction patterns. The interconnected nature of these risk factors is particularly striking: physical inactivity creates the foundation for obesity, while digital behaviors compete with physical activity and introduce new addictive patterns that further reduce movement and increase sedentary time. The most striking finding is the complete reversal of digital gender patterns: from male-dominated gaming addiction in 2014 to female-dominated social media addiction in 2022. This represents more than behavioral change; it signals a fundamental transformation in how adolescents engage with technology and the world around them. The convergence of these three crises: obesity, inactivity, and digital dependency: creates an urgent need for integrated policy responses that address not just individual behaviors but the systemic changes reshaping adolescent life. Our findings suggest that traditional public health approaches, focused on single risk factors, are insufficient for addressing the complex, interconnected challenges facing today's youth. The next generation's health depends on our ability to understand and respond to these converging epidemics with unprecedented urgency and innovation.</p>
-  </div>
+  <!-- Footer with Metadata -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="student-info">
+        <p><strong>Student:</strong>Tushar Jaggi</p>
+        <p><strong>Student ID:</strong> 33924104</p>
+        <p><strong>Unit:</strong> FIT3179 Data Visualization DV2</p>
+        <p><strong>Title:</strong> Global Adolescent Health Crisis: Obesity, Physical Inactivity & Digital Addiction Trends</p>
+        <p><strong>Data Sources:</strong> World Health Organization (WHO) & Health Behaviour in School-aged Children (HBSC)</p>
+      </div>
+    </div>
+  </footer>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      console.log("Loading dashboard...");
-      
-      // Load map
+      // Load all charts from JSON files
       vegaEmbed("#map", "map.vg.json", {actions: false})
-        .then(result => {
-          console.log("Map loaded successfully");
-        })
-        .catch(error => {
-          console.error("Error loading map:", error);
-        });
+        .catch(console.error);
       
-      // Load trend chart
-      vegaEmbed("#trend-chart", "trend_chart.vg.json", {actions: false})
-        .then(result => {
-          console.log("Trend chart loaded successfully");
-        })
-        .catch(error => {
-          console.error("Error loading trend chart:", error);
-        });
-      
-      // Load physical activity chart
       vegaEmbed("#physical-activity-chart", "physical_activity_trend.vg.json", {actions: false})
-        .then(result => {
-          console.log("Physical activity chart loaded successfully");
-        })
-        .catch(error => {
-          console.error("Error loading physical activity chart:", error);
-        });
+        .catch(console.error);
       
-      // Load gaming chart
-      loadGamingChart();
+      vegaEmbed("#gaming-chart", "screen_gaming_time.vg.json", {actions: false})
+        .catch(console.error);
       
-      // Load social media chart dynamically
-      updateSocialMediaChart();
+      vegaEmbed("#social-media-chart", "social_media_use.vg.json", {actions: false})
+        .catch(console.error);
+      
+      vegaEmbed("#trend-chart", "obesity_trend.vg.json", {actions: false})
+        .catch(console.error);
     });
-
-    function addSelectedCountry() {
-      const select = document.getElementById('country-select');
-      const countryCode = select.value;
-      const countryName = select.options[select.selectedIndex].text;
-      
-      if (!countryCode) {
-        alert('Please select a country first');
-        return;
-      }
-      
-      // Check if country is already selected
-      const existingTag = document.querySelector(`[data-country="${countryCode}"]`);
-      if (existingTag) {
-        alert('Country is already selected');
-        return;
-      }
-      
-      // Get data availability indicator
-      const dataIndicator = getDataAvailabilityIndicator(countryCode);
-      
-      // Add country tag
-      const container = document.querySelector('#selected-countries > div');
-      const tag = document.createElement('span');
-      tag.className = 'country-tag';
-      tag.setAttribute('data-country', countryCode);
-      tag.innerHTML = `${countryName} <span class="data-indicator" title="${dataIndicator.tooltip}">${dataIndicator.symbol}</span> <button onclick="removeCountry('${countryCode}')" style="margin-left: 5px; background: none; border: none; color: #666; cursor: pointer;">×</button>`;
-      container.appendChild(tag);
-      
-      // Reset dropdown
-      select.value = '';
-    }
-    
-    function getDataAvailabilityIndicator(countryCode) {
-      // Countries with complete data for both charts (major countries with good coverage)
-      const completeDataCountries = ['USA', 'CHN', 'BRA', 'MEX', 'DEU', 'GBR', 'FRA', 'CAN', 'AUS', 'ITA', 'ESP', 'TUR', 'SAU', 'ARG', 'POL', 'NLD', 'BGD', 'IDN', 'PAK', 'NGA', 'ZAF', 'EGY'];
-      
-      // Countries with limited physical activity data (like Japan - only 2010)
-      const limitedActivityCountries = ['JPN', 'RUS', 'KOR', 'IND', 'THA', 'VNM', 'PHL', 'MYS', 'SGP', 'HUN', 'CZE', 'SVK', 'HRV', 'EST', 'LTU', 'LVA'];
-      
-      // Countries with no physical activity data
-      const noActivityDataCountries = ['AFG', 'AGO', 'ALB', 'AND', 'ARE', 'ARM', 'ATG', 'AUT', 'AZE', 'BDI', 'BEL', 'BEN', 'BFA', 'BGR', 'BHR', 'BHS', 'BIH', 'BLR', 'BLZ', 'BOL', 'BRB', 'BRN', 'BTN', 'BWA', 'CAF', 'CHE', 'CHL', 'CIV', 'CMR', 'COD', 'COG', 'COK', 'COL', 'COM', 'CPV', 'CRI', 'CUB', 'CYP', 'DJI', 'DMA', 'DNK', 'DOM', 'DZA', 'ECU', 'ERI', 'EST', 'ETH', 'FIN', 'FJI', 'FSM', 'GAB', 'GEO', 'GHA', 'GIN', 'GMB', 'GNB', 'GNQ', 'GRC', 'GRD', 'GTM', 'GUY', 'HND', 'HTI', 'IRL', 'IRN', 'IRQ', 'ISL', 'ISR', 'JAM', 'JOR', 'KAZ', 'KEN', 'KGZ', 'KHM', 'KIR', 'KNA', 'KWT', 'LAO', 'LBN', 'LBR', 'LBY', 'LCA', 'LKA', 'LSO', 'LTU', 'LUX', 'LVA', 'MAR', 'MCO', 'MDA', 'MDG', 'MDV', 'MHL', 'MKD', 'MLI', 'MLT', 'MMR', 'MNE', 'MNG', 'MOZ', 'MRT', 'MUS', 'MWI', 'NAM', 'NER', 'NIC', 'NIU', 'NOR', 'NPL', 'NRU', 'NZL', 'OMN', 'PAN', 'PER', 'PLW', 'PNG', 'PRK', 'PRT', 'PRY', 'QAT', 'ROU', 'RWA', 'SDN', 'SEN', 'SLB', 'SLE', 'SLV', 'SMR', 'SOM', 'SRB', 'SSD', 'STP', 'SUR', 'SVN', 'SWE', 'SWZ', 'SYC', 'SYR', 'TCD', 'TGO', 'TJK', 'TKM', 'TLS', 'TON', 'TTO', 'TUN', 'TUV', 'TZA', 'UGA', 'UKR', 'URY', 'UZB', 'VCT', 'VEN', 'VUT', 'WSM', 'YEM', 'ZMB', 'ZWE'];
-      
-      if (completeDataCountries.includes(countryCode)) {
-        return {
-          symbol: '✓✓',
-          tooltip: 'Obesity: Complete (1990-2022) | Physical Activity: Complete (2001-2016)'
-        };
-      } else if (limitedActivityCountries.includes(countryCode)) {
-        return {
-          symbol: '✓△',
-          tooltip: 'Obesity: Complete (1990-2022) | Physical Activity: Limited data available'
-        };
-      } else if (noActivityDataCountries.includes(countryCode)) {
-        return {
-          symbol: '✓✗',
-          tooltip: 'Obesity: Complete (1990-2022) | Physical Activity: No data available'
-        };
-      } else {
-        return {
-          symbol: '?',
-          tooltip: 'Data availability unknown'
-        };
-      }
-    }
-    
-    function removeCountry(countryCode) {
-      const tag = document.querySelector(`[data-country="${countryCode}"]`);
-      if (tag) {
-        tag.remove();
-      }
-    }
-    
-    function clearAllCountries() {
-      const container = document.querySelector('#selected-countries > div');
-      container.innerHTML = '';
-    }
-    
-    function addDigitalCountry() {
-      const select = document.getElementById('digital-country-select');
-      const countryCode = select.value;
-      const countryName = select.options[select.selectedIndex].text;
-      
-      if (!countryCode) {
-        alert('Please select a country first');
-        return;
-      }
-      
-      // Check if country is already selected
-      const existingTag = document.querySelector(`#digital-selected-countries [data-country="${countryCode}"]`);
-      if (existingTag) {
-        alert('Country is already selected');
-        return;
-      }
-      
-      // Get data availability indicator for digital charts
-      const dataIndicator = getDigitalDataAvailabilityIndicator(countryCode);
-      
-      // Add country tag
-      const container = document.querySelector('#digital-selected-countries > div');
-      const tag = document.createElement('span');
-      tag.className = 'country-tag';
-      tag.setAttribute('data-country', countryCode);
-      tag.innerHTML = `${countryName} <span class="data-indicator" title="${dataIndicator.tooltip}">${dataIndicator.symbol}</span> <button onclick="removeDigitalCountry('${countryCode}')" style="margin-left: 5px; background: none; border: none; color: #666; cursor: pointer;">×</button>`;
-      container.appendChild(tag);
-      
-      // Reset dropdown
-      select.value = '';
-    }
-    
-    function removeDigitalCountry(countryCode) {
-      const tag = document.querySelector(`#digital-selected-countries [data-country="${countryCode}"]`);
-      if (tag) {
-        tag.remove();
-      }
-    }
-    
-    function clearAllDigitalCountries() {
-      const container = document.querySelector('#digital-selected-countries > div');
-      container.innerHTML = '';
-    }
-    
-    function getDigitalSelectedCountries() {
-      const tags = document.querySelectorAll('#digital-selected-countries .country-tag');
-      return Array.from(tags).map(tag => tag.getAttribute('data-country'));
-    }
-    
-    function getDigitalDataAvailabilityIndicator(countryCode) {
-      // Countries with data in both gaming (2014) and social media (2022) datasets
-      const completeDigitalCountries = ['ALB', 'ARM', 'AUT', 'BE-VLG', 'BE-WAL', 'BGR', 'CAN', 'CHE', 'CZE', 'DEU', 'DNK', 'ESP', 'EST', 'FIN', 'FRA', 'GB-ENG', 'GB-SCT', 'GB-WLS', 'GRC', 'HRV', 'HUN', 'IRL', 'ISL', 'ISR', 'ITA', 'LTU', 'LUX', 'LVA', 'MDA', 'MKD', 'MLT', 'NLD', 'NOR', 'POL', 'PRT', 'ROU', 'RUS', 'SVK', 'SVN', 'SWE', 'UKR'];
-      
-      // Countries with only gaming data (2014)
-      const gamingOnlyCountries = [];
-      
-      // Countries with only social media data (2022)  
-      const socialMediaOnlyCountries = [];
-      
-      if (completeDigitalCountries.includes(countryCode)) {
-        return {
-          symbol: '✓✓',
-          tooltip: 'Gaming: Available (2014) | Social Media: Available (2022)'
-        };
-      } else if (gamingOnlyCountries.includes(countryCode)) {
-        return {
-          symbol: '✓△',
-          tooltip: 'Gaming: Available (2014) | Social Media: No data available'
-        };
-      } else if (socialMediaOnlyCountries.includes(countryCode)) {
-        return {
-          symbol: '△✓',
-          tooltip: 'Gaming: No data available | Social Media: Available (2022)'
-        };
-      } else {
-        return {
-          symbol: '?',
-          tooltip: 'Data availability unknown'
-        };
-      }
-    }
-    
-    function getSelectedCountries() {
-      const tags = document.querySelectorAll('.country-tag');
-      return Array.from(tags).map(tag => tag.getAttribute('data-country'));
-    }
-
-    function updateTrendChart() {
-      const selectedCountries = getSelectedCountries();
-      
-      if (selectedCountries.length === 0) {
-        alert('Please select at least one country to compare.');
-        return;
-      }
-      
-      const filterCondition = selectedCountries.map(country => `datum.iso3 == '${country}'`).join(' || ');
-      
-      const chartConfig = {
-        "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-        "title": `Obesity Trends: ${selectedCountries.length} Selected Countries`,
-        "width": 700,
-        "height": 400,
-        "data": {
-          "url": "data/obesity_trend_total.csv"
-        },
-        "transform": [
-          {
-            "filter": filterCondition
-          }
-        ],
-        "mark": {
-          "type": "line",
-          "point": true,
-          "strokeWidth": 3
-        },
-        "encoding": {
-          "x": {
-            "field": "year",
-            "type": "temporal",
-            "title": "Year"
-          },
-          "y": {
-            "field": "prevalence",
-            "type": "quantitative",
-            "title": "Obesity Prevalence (%)",
-            "scale": {"domain": [0, 50]}
-          },
-          "color": {
-            "field": "country",
-            "type": "nominal",
-            "title": "Country",
-            "scale": {"scheme": "category20"},
-            "legend": {
-              "orient": "top-right"
-            }
-          },
-          "tooltip": [
-            {"field": "country", "title": "Country"},
-            {"field": "year", "title": "Year"},
-            {"field": "prevalence", "title": "Prevalence (%)", "format": ".2f"}
-          ]
-        },
-        "config": {
-          "view": {"stroke": "transparent"},
-          "background": "white"
-        }
-      };
-      
-      vegaEmbed("#trend-chart", chartConfig, {actions: false}).catch(console.error);
-    }
-
-
-    function updatePhysicalActivityChart() {
-      const selectedCountryCodes = getSelectedCountries();
-      const selectedCountries = [];
-      
-      const countryMap = {
-        'USA': 'United States of America', 'CHN': 'China', 'IND': 'India', 'BRA': 'Brazil', 'MEX': 'Mexico',
-        'DEU': 'Germany', 'GBR': 'United Kingdom', 'FRA': 'France', 'JPN': 'Japan', 'RUS': 'Russian Federation',
-        'CAN': 'Canada', 'AUS': 'Australia', 'ITA': 'Italy', 'ESP': 'Spain', 'KOR': 'Republic of Korea',
-        'TUR': 'Turkey', 'SAU': 'Saudi Arabia', 'ARG': 'Argentina', 'POL': 'Poland', 'NLD': 'Netherlands',
-        'BGD': 'Bangladesh', 'IDN': 'Indonesia', 'PAK': 'Pakistan', 'NGA': 'Nigeria', 'ZAF': 'South Africa',
-        'EGY': 'Egypt', 'AFG': 'Afghanistan', 'AGO': 'Angola', 'ALB': 'Albania', 'AND': 'Andorra',
-        'ARE': 'United Arab Emirates', 'ARM': 'Armenia', 'ATG': 'Antigua and Barbuda', 'AUT': 'Austria',
-        'AZE': 'Azerbaijan', 'BDI': 'Burundi', 'BEL': 'Belgium', 'BEN': 'Benin', 'BFA': 'Burkina Faso',
-        'BGR': 'Bulgaria', 'BHR': 'Bahrain', 'BHS': 'Bahamas', 'BIH': 'Bosnia and Herzegovina', 'BLR': 'Belarus',
-        'BLZ': 'Belize', 'BOL': 'Bolivia', 'BRB': 'Barbados', 'BRN': 'Brunei Darussalam', 'BTN': 'Bhutan',
-        'BWA': 'Botswana', 'CAF': 'Central African Republic', 'CHE': 'Switzerland', 'CHL': 'Chile',
-        'CIV': 'Côte d\'Ivoire', 'CMR': 'Cameroon', 'COD': 'Democratic Republic of the Congo', 'COG': 'Congo',
-        'COK': 'Cook Islands', 'COL': 'Colombia', 'COM': 'Comoros', 'CPV': 'Cabo Verde', 'CRI': 'Costa Rica',
-        'CUB': 'Cuba', 'CYP': 'Cyprus', 'CZE': 'Czechia', 'DJI': 'Djibouti', 'DMA': 'Dominica',
-        'DNK': 'Denmark', 'DOM': 'Dominican Republic', 'DZA': 'Algeria', 'ECU': 'Ecuador', 'ERI': 'Eritrea',
-        'EST': 'Estonia', 'ETH': 'Ethiopia', 'FIN': 'Finland', 'FJI': 'Fiji', 'FSM': 'Micronesia',
-        'GAB': 'Gabon', 'GEO': 'Georgia', 'GHA': 'Ghana', 'GIN': 'Guinea', 'GMB': 'Gambia',
-        'GNB': 'Guinea-Bissau', 'GNQ': 'Equatorial Guinea', 'GRC': 'Greece', 'GRD': 'Grenada',
-        'GTM': 'Guatemala', 'GUY': 'Guyana', 'HND': 'Honduras', 'HRV': 'Croatia', 'HTI': 'Haiti',
-        'HUN': 'Hungary', 'IRL': 'Ireland', 'IRN': 'Iran', 'IRQ': 'Iraq', 'ISL': 'Iceland',
-        'ISR': 'Israel', 'JAM': 'Jamaica', 'JOR': 'Jordan', 'KAZ': 'Kazakhstan', 'KEN': 'Kenya',
-        'KGZ': 'Kyrgyzstan', 'KHM': 'Cambodia', 'KIR': 'Kiribati', 'KNA': 'Saint Kitts and Nevis',
-        'KWT': 'Kuwait', 'LAO': 'Lao People\'s Democratic Republic', 'LBN': 'Lebanon', 'LBR': 'Liberia',
-        'LBY': 'Libya', 'LCA': 'Saint Lucia', 'LKA': 'Sri Lanka', 'LSO': 'Lesotho', 'LTU': 'Lithuania',
-        'LUX': 'Luxembourg', 'LVA': 'Latvia', 'MAR': 'Morocco', 'MCO': 'Monaco', 'MDA': 'Moldova',
-        'MDG': 'Madagascar', 'MDV': 'Maldives', 'MHL': 'Marshall Islands', 'MKD': 'North Macedonia',
-        'MLI': 'Mali', 'MLT': 'Malta', 'MMR': 'Myanmar', 'MNE': 'Montenegro', 'MNG': 'Mongolia',
-        'MOZ': 'Mozambique', 'MRT': 'Mauritania', 'MUS': 'Mauritius', 'MWI': 'Malawi', 'MYS': 'Malaysia',
-        'NAM': 'Namibia', 'NER': 'Niger', 'NIC': 'Nicaragua', 'NIU': 'Niue', 'NOR': 'Norway',
-        'NPL': 'Nepal', 'NRU': 'Nauru', 'NZL': 'New Zealand', 'OMN': 'Oman', 'PAN': 'Panama',
-        'PER': 'Peru', 'PHL': 'Philippines', 'PLW': 'Palau', 'PNG': 'Papua New Guinea',
-        'PRK': 'Democratic People\'s Republic of Korea', 'PRT': 'Portugal', 'PRY': 'Paraguay',
-        'QAT': 'Qatar', 'ROU': 'Romania', 'RWA': 'Rwanda', 'SDN': 'Sudan', 'SEN': 'Senegal',
-        'SGP': 'Singapore', 'SLB': 'Solomon Islands', 'SLE': 'Sierra Leone', 'SLV': 'El Salvador',
-        'SMR': 'San Marino', 'SOM': 'Somalia', 'SRB': 'Serbia', 'SSD': 'South Sudan',
-        'STP': 'Sao Tome and Principe', 'SUR': 'Suriname', 'SVK': 'Slovakia', 'SVN': 'Slovenia',
-        'SWE': 'Sweden', 'SWZ': 'Eswatini', 'SYC': 'Seychelles', 'SYR': 'Syrian Arab Republic',
-        'TCD': 'Chad', 'TGO': 'Togo', 'THA': 'Thailand', 'TJK': 'Tajikistan', 'TKM': 'Turkmenistan',
-        'TLS': 'Timor-Leste', 'TON': 'Tonga', 'TTO': 'Trinidad and Tobago', 'TUN': 'Tunisia',
-        'TUV': 'Tuvalu', 'TZA': 'United Republic of Tanzania', 'UGA': 'Uganda', 'UKR': 'Ukraine',
-        'URY': 'Uruguay', 'UZB': 'Uzbekistan', 'VCT': 'Saint Vincent and the Grenadines',
-        'VEN': 'Venezuela', 'VNM': 'Viet Nam', 'VUT': 'Vanuatu', 'WSM': 'Samoa', 'YEM': 'Yemen',
-        'ZMB': 'Zambia', 'ZWE': 'Zimbabwe'
-      };
-      
-      selectedCountryCodes.forEach(countryCode => {
-        if (countryMap[countryCode]) {
-          selectedCountries.push(countryMap[countryCode]);
-        }
-      });
-      
-      if (selectedCountries.length === 0) {
-        alert('Please select at least one country');
-        return;
-      }
-      
-      const filterCondition = selectedCountries.map(country => `datum.Location == '${country}'`).join(' || ');
-      
-      const chartConfig = {
-        "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-        "title": `Physical Inactivity Trends: ${selectedCountries.length} Countries`,
-        "width": 800,
-        "height": 300,
-        "data": {
-          "url": "data/physical_activity_insufficient_11-17.csv"
-        },
-        "transform": [
-          {
-            "filter": "datum.Dim2 == '11-17 years'"
-          },
-          {
-            "filter": "datum.Period >= 2001 && datum.Period <= 2016"
-          },
-          {
-            "filter": "datum.FactValueNumeric != null"
-          },
-          {
-            "filter": "datum['Location type'] == 'Country'"
-          },
-          {
-            "filter": "datum.Dim1 == 'Both sexes'"
-          },
-          {
-            "filter": filterCondition
-          },
-          {
-            "sort": [{"field": "Period"}]
-          }
-        ],
-        "mark": {
-          "type": "line",
-          "point": true,
-          "strokeWidth": 3
-        },
-        "encoding": {
-          "x": {
-            "field": "Period",
-            "type": "quantitative",
-            "title": "Year",
-            "axis": {"format": "d", "titleFontSize": 14, "labelFontSize": 12}
-          },
-          "y": {
-            "field": "FactValueNumeric",
-            "type": "quantitative",
-            "title": "Physically inactive (%)",
-            "scale": {"domain": [60, 100]},
-            "axis": {"titleFontSize": 14, "labelFontSize": 12}
-          },
-          "color": {
-            "field": "Location",
-            "type": "nominal",
-            "title": "Country",
-            "scale": {"scheme": "category20"},
-            "legend": {
-              "orient": "top-right",
-              "titleFontSize": 12,
-              "labelFontSize": 10,
-              "columns": 2,
-              "symbolType": "stroke"
-            }
-          },
-          "tooltip": [
-            {"field": "Location", "title": "Country", "type": "nominal"},
-            {"field": "Period", "title": "Year", "type": "quantitative"},
-            {"field": "FactValueNumeric", "title": "Inactivity (%)", "format": ".1f", "type": "quantitative"}
-          ]
-        },
-        "config": {
-          "view": {"stroke": "transparent"},
-          "background": "#f8f9fa"
-        }
-      };
-      
-      vegaEmbed("#physical-activity-chart", chartConfig, {actions: false}).catch(console.error);
-    }
-
-    function updateSocialMediaGenderFilter() {
-      console.log("Gender filter updated");
-      updateSocialMediaChart();
-    }
-
-    function toggleAllGenders() {
-      console.log("Toggle all genders clicked");
-      const girlsCheckbox = document.getElementById('show-girls');
-      const boysCheckbox = document.getElementById('show-boys');
-      
-      if (girlsCheckbox.checked && boysCheckbox.checked) {
-        // Both checked, uncheck boys
-        boysCheckbox.checked = false;
-      } else if (!girlsCheckbox.checked && !boysCheckbox.checked) {
-        // Both unchecked, check both
-        girlsCheckbox.checked = true;
-        boysCheckbox.checked = true;
-      } else {
-        // One checked, check both
-        girlsCheckbox.checked = true;
-        boysCheckbox.checked = true;
-      }
-      
-      updateSocialMediaChart();
-    }
-
-    function getGenderFilter() {
-      const showGirls = document.getElementById('show-girls').checked;
-      const showBoys = document.getElementById('show-boys').checked;
-      
-      if (showGirls && showBoys) {
-        return null; // Show both
-      } else if (showGirls && !showBoys) {
-        return "Girl";
-      } else if (!showGirls && showBoys) {
-        return "Boy";
-      } else {
-        return "none"; // Show neither
-      }
-    }
-
-    function updateSocialMediaChart() {
-      const selectedCountries = getDigitalSelectedCountries();
-      
-      // If no countries are selected, show all countries by default
-      let filterCondition = "true"; // Show all countries by default
-      
-      if (selectedCountries.length > 0) {
-        // Country code mapping for social media data
-        const countryCodeMap = {
-          'ALB': 'Albania', 'ARM': 'Armenia', 'AUT': 'Austria', 'BE-VLG': 'Belgium (Flanders)', 
-          'BE-WAL': 'Belgium (Wallonia)', 'BGR': 'Bulgaria', 'CAN': 'Canada', 'CHE': 'Switzerland',
-          'CZE': 'Czech Republic', 'DEU': 'Germany', 'DNK': 'Denmark', 'ESP': 'Spain', 
-          'EST': 'Estonia', 'FIN': 'Finland', 'FRA': 'France', 'GB-ENG': 'England', 
-          'GB-SCT': 'Scotland', 'GB-WLS': 'Wales', 'GRC': 'Greece', 'HRV': 'Croatia', 
-          'HUN': 'Hungary', 'IRL': 'Ireland', 'ISL': 'Iceland', 'ISR': 'Israel', 
-          'ITA': 'Italy', 'LTU': 'Lithuania', 'LUX': 'Luxembourg', 'LVA': 'Latvia', 
-          'MDA': 'Moldova', 'MKD': 'North Macedonia', 'MLT': 'Malta', 'NLD': 'Netherlands', 
-          'NOR': 'Norway', 'POL': 'Poland', 'PRT': 'Portugal', 'ROU': 'Romania', 
-          'RUS': 'Russia', 'SVK': 'Slovakia', 'SVN': 'Slovenia', 'SWE': 'Sweden', 'UKR': 'Ukraine'
-        };
-        
-        // Special handling for United Kingdom - expand to all UK regions
-        const expandUKCountries = (codes) => {
-          const expanded = [];
-          codes.forEach(code => {
-            if (code === 'GBR') {
-              // United Kingdom expands to England, Scotland, Wales
-              expanded.push('England', 'Scotland', 'Wales');
-            } else if (countryCodeMap[code]) {
-              expanded.push(countryCodeMap[code]);
-            }
-          });
-          return expanded;
-        };
-        
-        // Convert country codes to country names for filtering
-        const selectedCountryNames = expandUKCountries(selectedCountries);
-        
-        if (selectedCountryNames.length > 0) {
-          filterCondition = selectedCountryNames.map(country => `datum.Country == '${country}'`).join(' || ');
-        }
-      }
-      
-      // Get gender filter condition
-      const genderFilter = getGenderFilter();
-      let genderFilterCondition = "true";
-      
-      if (genderFilter === "Girl") {
-        genderFilterCondition = "datum.Gender == 'Girl'";
-      } else if (genderFilter === "Boy") {
-        genderFilterCondition = "datum.Gender == 'Boy'";
-      } else if (genderFilter === "none") {
-        genderFilterCondition = "false";
-      }
-      
-      const chartConfig = {
-        "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-        "title": `Problematic Social Media Use (15-year-olds, 2022)`,
-        "width": 800,
-        "height": 400,
-        "data": {
-          "url": "data/social_media_transformed.csv",
-          "format": {
-            "type": "csv",
-            "parse": {
-              "Percentage": "number"
-            }
-          }
-        },
-        "transform": [
-          {
-            "filter": filterCondition
-          },
-          {
-            "filter": genderFilterCondition
-          }
-        ],
-        "mark": {
-          "type": "bar",
-          "cornerRadius": 4
-        },
-        "encoding": {
-          "y": {
-            "field": "Country",
-            "type": "nominal",
-            "sort": {
-              "field": "Percentage",
-              "op": "mean",
-              "order": "descending"
-            },
-            "title": "Country",
-            "axis": {
-              "labelLimit": 100
-            }
-          },
-          "x": {
-            "field": "Percentage",
-            "type": "quantitative",
-            "title": "Problematic Social Media Use (%)",
-            "scale": {
-              "domain": [0, 35]
-            }
-          },
-          "color": {
-            "field": "Gender",
-            "type": "nominal",
-            "scale": {
-              "domain": ["Girl", "Boy"],
-              "range": ["#ff69b4", "#1f77b4"]
-            },
-            "title": "Gender",
-            "legend": {
-              "title": "Gender",
-              "labelFontSize": 12,
-              "titleFontSize": 12
-            }
-          },
-          "tooltip": [
-            {
-              "field": "Country",
-              "title": "Country",
-              "type": "nominal"
-            },
-            {
-              "field": "Gender",
-              "title": "Gender",
-              "type": "nominal"
-            },
-            {
-              "field": "Percentage",
-              "title": "Problematic Use (%)",
-              "type": "quantitative",
-              "format": ".1f"
-            }
-          ]
-        },
-        "config": {
-          "axis": {
-            "labelFontSize": 10,
-            "titleFontSize": 12
-          },
-          "legend": {
-            "labelFontSize": 11,
-            "titleFontSize": 12
-          },
-          "view": {"stroke": "transparent"},
-          "background": "#f8f9fa"
-        }
-      };
-      
-      vegaEmbed("#social-media-chart", chartConfig, {actions: false}).catch(console.error);
-    }
-
-    function loadGamingChart() {
-      vegaEmbed("#screen-gaming-chart", "screen_gaming_time_2014.vg.json", {actions: false})
-        .then(result => {
-          console.log("Screen & gaming time chart loaded successfully");
-        })
-        .catch(error => {
-          console.error("Error loading screen & gaming time chart:", error);
-        });
-    }
-
-    function updateGamingChart() {
-      const selectedCountries = getDigitalSelectedCountries();
-      
-      if (selectedCountries.length === 0) {
-        alert('Please select at least one country to display.');
-        return;
-      }
-      
-      const filterCondition = selectedCountries.map(country => `datum.COUNTRY == '${country}'`).join(' || ');
-      
-      const chartConfig = {
-        "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-        "title": `Screen & Gaming Time among Adolescents (2014) - ${selectedCountries.length} Countries`,
-        "width": 700,
-        "height": 400,
-        "data": {
-          "url": "data/gaming_time_clean.csv",
-          "format": {
-            "type": "csv",
-            "parse": {
-              "VALUE": "number",
-              "YEAR": "number"
-            }
-          }
-        },
-        "transform": [
-          {
-            "filter": filterCondition
-          },
-          {
-            "calculate": "datum.COUNTRY == '' ? 'HBSC Member Countries' : datum.COUNTRY",
-            "as": "COUNTRY_DISPLAY"
-          }
-        ],
-        "mark": {
-          "type": "bar",
-          "cornerRadius": 4
-        },
-        "encoding": {
-          "y": {
-            "field": "COUNTRY_DISPLAY",
-            "type": "nominal",
-            "sort": {
-              "field": "VALUE",
-              "op": "mean",
-              "order": "descending"
-            },
-            "title": "Country",
-            "axis": {
-              "labelLimit": 100
-            }
-          },
-          "x": {
-            "field": "VALUE",
-            "type": "quantitative",
-            "title": "% of adolescents playing ≥ 2 h on weekdays",
-            "scale": {
-              "domain": [0, 70]
-            }
-          },
-          "color": {
-            "field": "SEX",
-            "type": "nominal",
-            "scale": {
-              "domain": ["MALE", "FEMALE"],
-              "range": ["#1f77b4", "#ff69b4"]
-            },
-            "title": "Sex",
-            "legend": {
-              "title": "Sex",
-              "labelFontSize": 12,
-              "titleFontSize": 12
-            }
-          },
-          "tooltip": [
-            {
-              "field": "COUNTRY_DISPLAY",
-              "title": "Country",
-              "type": "nominal"
-            },
-            {
-              "field": "SEX",
-              "title": "Sex",
-              "type": "nominal"
-            },
-            {
-              "field": "VALUE",
-              "title": "Value (%)",
-              "type": "quantitative",
-              "format": ".1f"
-            },
-            {
-              "field": "YEAR",
-              "title": "Year",
-              "type": "nominal"
-            }
-          ]
-        },
-        "config": {
-          "axis": {
-            "labelFontSize": 10,
-            "titleFontSize": 12
-          },
-          "legend": {
-            "labelFontSize": 11,
-            "titleFontSize": 12
-          }
-        }
-      };
-      
-      vegaEmbed("#screen-gaming-chart", chartConfig, {actions: false}).catch(console.error);
-    }
   </script>
-  </div>
 </body>
 </html>

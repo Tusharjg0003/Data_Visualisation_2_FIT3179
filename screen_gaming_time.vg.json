@@ -1,0 +1,104 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Screen & Gaming Time",
+  "width": 700,
+  "height": 400,
+  "data": {"url": "data/gaming_time_clean.csv"},
+  "params": [
+    {
+      "name": "CountryFilter",
+      "value": "Key Countries",
+      "bind": {
+        "input": "select",
+        "name": "Select Country: ",
+        "options": [
+          "Key Countries",
+          "Malta",
+          "Netherlands",
+          "United Kingdom",
+          "Canada",
+          "Bulgaria",
+          "Germany",
+          "Norway",
+          "Belgium",
+          "Romania",
+          "Sweden",
+          "Poland",
+          "Italy",
+          "Spain",
+          "France",
+          "Czech Republic",
+          "Croatia",
+          "Finland",
+          "Switzerland",
+          "Austria",
+          "Ireland",
+          "Denmark"
+        ],
+        "labels": [
+          "Key Countries (Default)",
+          "Malta",
+          "Netherlands",
+          "United Kingdom",
+          "Canada",
+          "Bulgaria",
+          "Germany",
+          "Norway",
+          "Belgium",
+          "Romania",
+          "Sweden",
+          "Poland",
+          "Italy",
+          "Spain",
+          "France",
+          "Czech Republic",
+          "Croatia",
+          "Finland",
+          "Switzerland",
+          "Austria",
+          "Ireland",
+          "Denmark"
+        ]
+      }
+    }
+  ],
+  "transform": [
+    {
+      "calculate": "datum.COUNTRY == 'DEU' ? 'Germany' : datum.COUNTRY == 'FRA' ? 'France' : (datum.COUNTRY == 'GB-ENG' || datum.COUNTRY == 'GB-SCT' || datum.COUNTRY == 'GB-WLS') ? 'United Kingdom' : datum.COUNTRY == 'ITA' ? 'Italy' : datum.COUNTRY == 'ESP' ? 'Spain' : datum.COUNTRY == 'NLD' ? 'Netherlands' : datum.COUNTRY == 'SWE' ? 'Sweden' : datum.COUNTRY == 'NOR' ? 'Norway' : datum.COUNTRY == 'POL' ? 'Poland' : datum.COUNTRY == 'CZE' ? 'Czech Republic' : datum.COUNTRY == 'CAN' ? 'Canada' : datum.COUNTRY == 'BGR' ? 'Bulgaria' : datum.COUNTRY == 'HRV' ? 'Croatia' : datum.COUNTRY == 'FIN' ? 'Finland' : datum.COUNTRY == 'CHE' ? 'Switzerland' : datum.COUNTRY == 'AUT' ? 'Austria' : (datum.COUNTRY == 'BE-VLG' || datum.COUNTRY == 'BE-WAL') ? 'Belgium' : datum.COUNTRY == 'IRL' ? 'Ireland' : datum.COUNTRY == 'DNK' ? 'Denmark' : datum.COUNTRY == 'MLT' ? 'Malta' : datum.COUNTRY == 'ROU' ? 'Romania' : datum.COUNTRY",
+      "as": "CountryName"
+    },
+    {
+      "filter": "CountryFilter == 'Key Countries' ? (datum.CountryName == 'Malta' || datum.CountryName == 'Netherlands' || datum.CountryName == 'United Kingdom' || datum.CountryName == 'Canada' || datum.CountryName == 'Bulgaria' || datum.CountryName == 'Germany' || datum.CountryName == 'Norway' || datum.CountryName == 'Romania') : (datum.CountryName == CountryFilter)"
+    }
+  ],
+  "mark": {"type": "bar", "cornerRadius": 4},
+  "encoding": {
+    "y": {
+      "field": "CountryName",
+      "type": "nominal",
+      "sort": {"field": "VALUE", "order": "descending"},
+      "title": "Country"
+    },
+    "x": {
+      "field": "VALUE",
+      "type": "quantitative",
+      "title": "% ≥2 hours daily gaming"
+    },
+    "color": {
+      "field": "SEX",
+      "type": "nominal",
+      "scale": {
+        "domain": ["MALE", "FEMALE"],
+        "range": ["#1f77b4", "#ff69b4"]
+      },
+      "legend": {
+        "title": "Gender"
+      }
+    },
+    "tooltip": [
+      {"field": "CountryName", "title": "Country"},
+      {"field": "SEX", "title": "Gender"},
+      {"field": "VALUE", "title": "Gaming %", "format": ".1f"}
+    ]
+  }
+}

@@ -1,74 +1,169 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Physical Inactivity Trends: Adolescents (11-17 years), 2001-2016",
-  "width": 800,
-  "height": 300,
-  "data": {
-    "url": "data/physical_activity_insufficient_11-17.csv"
-  },
-  "transform": [
+  "title": "Physical Inactivity Trends",
+  "width": 700,
+  "height": 600,
+  "params": [
     {
-      "filter": "datum.Dim2 == '11-17 years'"
-    },
-    {
-      "filter": "datum.Period >= 2001 && datum.Period <= 2016"
-    },
-    {
-      "filter": "datum.FactValueNumeric != null"
-    },
-    {
-      "filter": "datum['Location type'] == 'Country'"
-    },
-    {
-      "filter": "datum.Dim1 == 'Both sexes'"
-    },
-    {
-      "filter": "datum.Location == 'United States of America' || datum.Location == 'China' || datum.Location == 'India' || datum.Location == 'Brazil' || datum.Location == 'Mexico' || datum.Location == 'Germany' || datum.Location == 'United Kingdom' || datum.Location == 'France'"
-    },
-    {
-      "sort": [{"field": "Period"}]
+      "name": "CountryFilter",
+      "value": "Key Countries",
+      "bind": {
+        "input": "select",
+        "name": "Select Country: ",
+        "options": [
+          "Key Countries",
+          "United States of America",
+          "China",
+          "India",
+          "Brazil",
+          "Germany",
+          "United Kingdom of Great Britain and Northern Ireland",
+          "Canada",
+          "Australia",
+          "Republic of Korea",
+          "Philippines",
+          "Italy",
+          "Bangladesh",
+          "France",
+          "Russian Federation",
+          "Mexico",
+          "Spain"
+        ],
+        "labels": [
+          "Key Countries (Default)",
+          "United States",
+          "China",
+          "India",
+          "Brazil",
+          "Germany",
+          "United Kingdom",
+          "Canada",
+          "Australia",
+          "South Korea",
+          "Philippines",
+          "Italy",
+          "Bangladesh",
+          "France",
+          "Russia",
+          "Mexico",
+          "Spain"
+        ]
+      }
     }
   ],
-  "mark": {
-    "type": "line",
-    "point": true,
-    "strokeWidth": 3
-  },
-  "encoding": {
-    "x": {
-      "field": "Period",
-      "type": "quantitative",
-      "title": "Year",
-      "axis": {"format": "d", "titleFontSize": 14, "labelFontSize": 12}
+  "data": {"url": "data/physical_activity_insufficient_11-17.csv"},
+  "transform": [
+    {
+      "filter": "CountryFilter == 'Key Countries' ? (datum.Location == 'United States of America' || datum.Location == 'Republic of Korea' || datum.Location == 'Philippines' || datum.Location == 'Australia' || datum.Location == 'Italy' || datum.Location == 'Bangladesh' || datum.Location == 'India' || datum.Location == 'China') : (datum.Location == CountryFilter)"
+    }
+  ],
+  "vconcat": [
+    {
+      "title": "Focus View",
+      "width": 700,
+      "height": 380,
+
+      "encoding": {
+        "x": {
+          "field": "Period",
+          "type": "temporal",
+          "title": "Year",
+          "scale": {"domain": {"param": "brush"}}
+        },
+        "y": {
+          "field": "FactValueNumeric",
+          "type": "quantitative",
+          "title": "Physically inactive (%)",
+          "scale": {"domain": [0, 100]}
+        }
+      },
+
+      "layer": [
+        {
+          "mark": {"type": "line", "point": true, "strokeWidth": 3},
+          "encoding": {
+            "color": {
+              "field": "Location",
+              "type": "nominal",
+              "title": "Country",
+              "scale": {
+                "range": ["#1f77b4", "#ff7f0e", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf", "#aec7e8", "#ffbb78", "#c5b0d5", "#c49c94", "#f7b6d3", "#c7c7c7", "#dbdb8d", "#9edae5", "#393b79", "#6b6ecf", "#9c9ede", "#b5cf6b"]
+              }
+            },
+            "tooltip": [
+              {"field": "Location", "title": "Country"},
+              {"field": "Period", "title": "Year", "type": "temporal", "format": "%Y"},
+              {"field": "FactValueNumeric", "title": "Inactivity (%)", "format": ".1f"}
+            ]
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "right",
+            "dx": -10,
+            "dy": -15,
+            "fontSize": 10,
+            "color": "#7f8c8d",
+            "fontWeight": "600",
+            "opacity": {"expr": "CountryFilter === 'Key Countries' ? 1 : 0"}
+          },
+          "encoding": {
+            "x": {"datum": {"year": 2016}},
+            "y": {"datum": 94.2},
+            "text": {"value": "Highest: South Korea 94.2%"}
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "right",
+            "dx": -10,
+            "dy": 15,
+            "fontSize": 10,
+            "color": "#7f8c8d",
+            "fontWeight": "600",
+            "opacity": {"expr": "CountryFilter === 'Key Countries' ? 1 : 0"}
+          },
+          "encoding": {
+            "x": {"datum": {"year": 2016}},
+            "y": {"datum": 66.1},
+            "text": {"value": "Lowest: Bangladesh 66.1%"}
+          }
+        }
+      ]
     },
-    "y": {
-      "field": "FactValueNumeric",
-      "type": "quantitative",
-      "title": "Physically inactive (%)",
-      "scale": {"domain": [60, 100]},
-      "axis": {"titleFontSize": 14, "labelFontSize": 12}
-    },
-    "color": {
-      "field": "Location",
-      "type": "nominal",
-      "title": "Country",
-      "scale": {"scheme": "category20"},
-      "legend": {
-        "orient": "top-right",
-        "titleFontSize": 12,
-        "labelFontSize": 10,
-        "columns": 2,
-        "symbolType": "stroke"
+    {
+      "title": "Context View (Brush to Zoom)",
+      "width": 700,
+      "height": 150,
+      "params": [
+        {
+          "name": "brush",
+          "select": {"type": "interval", "encodings": ["x"]}
+        }
+      ],
+      "mark": {"type": "line", "point": true, "strokeWidth": 1, "opacity": 0.7},
+      "encoding": {
+        "x": {"field": "Period", "type": "temporal", "title": ""},
+        "y": {
+          "field": "FactValueNumeric",
+          "type": "quantitative",
+          "title": "",
+          "scale": {"domain": [0, 100]}
+        },
+        "color": {
+          "field": "Location",
+          "type": "nominal",
+          "scale": {
+            "range": ["#1f77b4", "#ff7f0e", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf", "#aec7e8", "#ffbb78", "#c5b0d5", "#c49c94", "#f7b6d3", "#c7c7c7", "#dbdb8d", "#9edae5", "#393b79", "#6b6ecf", "#9c9ede", "#b5cf6b"]
+          }
+        },
+        "opacity": {
+          "condition": {"param": "brush", "value": 0.3},
+          "value": 0.1
+        }
       }
-    },
-    "tooltip": [
-      {"field": "Location", "title": "Country", "type": "nominal"},
-      {"field": "Period", "title": "Year", "type": "quantitative"},
-      {"field": "FactValueNumeric", "title": "Inactivity (%)", "format": ".1f", "type": "quantitative"}
-    ]
-  },
-  "config": {
-    "view": {"stroke": "transparent"},
-    "background": "#f8f9fa"
-  }
+    }
+  ]
 }

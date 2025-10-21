@@ -1,0 +1,171 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {"text": "Obesity Trends", "fontSize": 24, "fontWeight": "bold"},
+  "width": 700,
+  "height": 600,
+  "config": { "view": { "clip": false } },
+  "params": [
+    {
+      "name": "CountryFilter",
+      "value": "Key Countries",
+      "bind": {
+        "input": "select",
+        "name": "Select Country: ",
+        "options": [
+          "Key Countries","USA","CHN","IND","BRA","DEU","GBR","JPN","AUS","CAN","FRA","RUS","MEX","ITA","ESP","CHL","NZL","SAU","EGY"
+        ],
+        "labels": [
+          "Key Countries (Default)","United States","China","India","Brazil","Germany","United Kingdom","Japan","Australia","Canada","France","Russia","Mexico","Italy","Spain","Chile","New Zealand","Saudi Arabia","Egypt"
+        ]
+      }
+    }
+  ],
+  "data": { "url": "data/obesity_trend_total.csv" },
+  "transform": [
+    {
+      "filter": "CountryFilter == 'Key Countries' ? (datum.iso3 == 'USA' || datum.iso3 == 'CHN' || datum.iso3 == 'IND' || datum.iso3 == 'BRA' || datum.iso3 == 'DEU' || datum.iso3 == 'CHL' || datum.iso3 == 'NZL' || datum.iso3 == 'SAU') : (datum.iso3 == CountryFilter)"
+    }
+  ],
+  "vconcat": [
+    {
+      "title": {"text": "Focus View", "fontSize": 18, "fontWeight": "bold"},
+      "width": 700,
+      "height": 300,
+      "padding": { "top": 42, "right": 16, "bottom": 0, "left": 12 },
+      "encoding": {
+        "x": { "field": "year", "type": "temporal", "title": "Year", "scale": { "domain": { "param": "brush" } } },
+        "y": { "field": "prevalence", "type": "quantitative", "title": "Obesity Prevalence (%)", "scale": { "domain": [0, 50] } }
+      },
+      "layer": [
+        {
+          "data": { "values": [ { "start": "2020-01-01", "end": "2022-12-31" } ] },
+          "mark": { "type": "rect", "opacity": 0.06, "color": "#444" },
+          "encoding": {
+            "x": { "field": "start", "type": "temporal" },
+            "x2": { "field": "end" },
+            "y": { "datum": 0 },
+            "y2": { "datum": 50 }
+          }
+        },
+
+        
+        {
+          "data": {
+            "values": [
+              { "date": "2000-01-01", "y": 0 },
+              { "date": "2000-01-01", "y": 50 }
+            ]
+          },
+          "mark": { "type": "line", "stroke": "red", "strokeWidth": 2.5 },
+          "encoding": {
+            "x": { "field": "date", "type": "temporal" },
+            "y": { "field": "y", "type": "quantitative" }
+          }
+        },
+        
+        {
+          "data": {
+            "values": [
+              { "date": "2010-01-01", "y": 0 },
+              { "date": "2010-01-01", "y": 50 }
+            ]
+          },
+          "mark": { "type": "line", "stroke": "green", "strokeWidth": 2.5 },
+          "encoding": {
+            "x": { "field": "date", "type": "temporal" },
+            "y": { "field": "y", "type": "quantitative" }
+          }
+        },
+        
+        {
+          "data": {
+            "values": [
+              { "date": "2020-01-01", "y": 0 },
+              { "date": "2020-01-01", "y": 50 }
+            ]
+          },
+          "mark": { "type": "line", "stroke": "orange", "strokeWidth": 2.5 },
+          "encoding": {
+            "x": { "field": "date", "type": "temporal" },
+            "y": { "field": "y", "type": "quantitative" }
+          }
+        },
+
+        
+        {
+          "mark": { "type": "line", "point": true, "strokeWidth": 3 },
+          "encoding": {
+            "color": {
+              "field": "country",
+              "type": "nominal",
+              "title": "Country",
+              "scale": {
+                "range": ["#1f77b4","#ff7f0e","#9467bd","#8c564b","#e377c2","#7f7f7f","#bcbd22","#17becf","#aec7e8","#ffbb78","#c5b0d5","#c49c94","#f7b6d3","#c7c7c7","#dbdb8d","#9edae5","#393b79","#6b6ecf","#9c9ede","#b5cf6b"]
+              }
+            },
+            "tooltip": [
+              { "field": "country", "title": "Country" },
+              { "field": "year", "title": "Year", "type": "temporal", "format": "%Y" },
+              { "field": "prevalence", "title": "Obesity %", "format": ".1f" }
+            ]
+          }
+        },
+
+        
+        {
+          "data": { "values": [ { "date": "2000-01-01", "label": "Ultra-processed food era" } ] },
+          "mark": { "type": "text", "dy": -8, "align": "center", "fontSize": 11, "fontWeight": "bold", "color": "red" },
+          "encoding": {
+            "x": { "field": "date", "type": "temporal" },
+            "y": { "value": 50 },
+            "text": { "field": "label" }
+          }
+        },
+        {
+          "data": { "values": [ { "date": "2010-01-01", "label": "Anti-obesity campaigns" } ] },
+          "mark": { "type": "text", "dy": -8, "align": "center", "fontSize": 11, "fontWeight": "bold", "color": "green" },
+          "encoding": {
+            "x": { "field": "date", "type": "temporal" },
+            "y": { "value": 50 },
+            "text": { "field": "label" }
+          }
+        },
+        {
+          "data": { "values": [ { "date": "2020-01-01", "label": "COVID-19" } ] },
+          "mark": { "type": "text", "dy": -8, "align": "center", "fontSize": 11, "fontWeight": "bold", "color": "orange" },
+          "encoding": {
+            "x": { "field": "date", "type": "temporal" },
+            "y": { "value": 50 },
+            "text": { "field": "label" }
+          }
+        }
+      ]
+    },
+
+    {
+      "title": {"text": "Context View (Brush to Zoom)", "fontSize": 18, "fontWeight": "bold"},
+      "width": 700,
+      "height": 150,
+      "layer": [
+        {
+          "params": [
+            { "name": "brush", "select": { "type": "interval", "encodings": ["x"] } }
+          ],
+          "mark": { "type": "line", "point": true, "strokeWidth": 1, "opacity": 0.7 },
+          "encoding": {
+            "x": { "field": "year", "type": "temporal", "title": "" },
+            "y": { "field": "prevalence", "type": "quantitative", "title": "", "scale": { "domain": [0, 50] } },
+            "color": {
+              "field": "country",
+              "type": "nominal",
+              "scale": {
+                "range": ["#1f77b4","#ff7f0e","#9467bd","#8c564b","#e377c2","#7f7f7f","#bcbd22","#17becf","#aec7e8","#ffbb78","#c5b0d5","#c49c94","#f7b6d3","#c7c7c7","#dbdb8d","#9edae5","#393b79","#6b6ecf","#9c9ede","#b5cf6b"]
+              }
+            },
+            "opacity": { "condition": { "param": "brush", "value": 0.3 }, "value": 0.1 }
+          }
+        }
+      ]
+    }
+  ]
+}
